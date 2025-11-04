@@ -19,12 +19,12 @@ export const serverEnv = createEnv({
     DAYTONA_API_KEY: z.string().optional(),
     
     // Optional Auth Providers (can be added later)
-    GITHUB_CLIENT_ID: z.string().optional(),
-    GITHUB_CLIENT_SECRET: z.string().optional(),
-    GOOGLE_CLIENT_ID: z.string().optional(),
-    GOOGLE_CLIENT_SECRET: z.string().optional(),
-    TWITTER_CLIENT_ID: z.string().optional(),
-    TWITTER_CLIENT_SECRET: z.string().optional(),
+    GITHUB_CLIENT_ID: z.string().optional().default(""),
+    GITHUB_CLIENT_SECRET: z.string().optional().default(""),
+    GOOGLE_CLIENT_ID: z.string().optional().default(""),
+    GOOGLE_CLIENT_SECRET: z.string().optional().default(""),
+    TWITTER_CLIENT_ID: z.string().optional().default(""),
+    TWITTER_CLIENT_SECRET: z.string().optional().default(""),
     
     // Optional Redis (can be added later)
     REDIS_URL: z.string().optional(),
