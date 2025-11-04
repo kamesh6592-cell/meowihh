@@ -59,15 +59,15 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   }
   return {
     title: title,
-    description: 'A search in scira.ai',
+    description: 'A search in AJ STUDIOZ',
     openGraph: {
       title: title,
-      url: `https://scira.ai/search/${id}`,
-      description: 'A search in scira.ai',
-      siteName: 'scira.ai',
+      url: `https://meowihh.vercel.app/search/${id}`,
+      description: 'A search in AJ STUDIOZ',
+      siteName: 'AJ STUDIOZ',
       images: [
         {
-          url: `https://scira.ai/api/og/chat/${id}`,
+          url: `https://meowihh.vercel.app/api/og/chat/${id}`,
           width: 1200,
           height: 630,
         },
@@ -76,13 +76,13 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     twitter: {
       card: 'summary_large_image',
       title: title,
-      url: `https://scira.ai/search/${id}`,
-      description: 'A search in scira.ai',
-      siteName: 'scira.ai',
-      creator: '@sciraai',
+      url: `https://meowihh.vercel.app/search/${id}`,
+      description: 'A search in AJ STUDIOZ',
+      siteName: 'AJ STUDIOZ',
+      creator: '@ajstudioz',
       images: [
         {
-          url: `https://scira.ai/api/og/chat/${id}`,
+          url: `https://meowihh.vercel.app/api/og/chat/${id}`,
           width: 1200,
           height: 630,
         },

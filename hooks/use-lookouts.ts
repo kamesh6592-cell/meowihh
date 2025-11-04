@@ -135,7 +135,8 @@ export function useLookouts() {
     }) => {
       const { onSuccess: successCallback, ...mutationParams } = params;
       const result = await createScheduledLookout(mutationParams);
-      if (!result.success) {
+      // Check if result has success property (for backwards compatibility)
+      if ('success' in result && !result.success) {
         throw new Error(result.error || 'Failed to create lookout');
       }
       return { result, onSuccess: successCallback };

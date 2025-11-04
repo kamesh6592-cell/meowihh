@@ -226,7 +226,7 @@ export default function AboutPage() {
             {/* Right Side Actions */}
             <div className="flex items-center gap-4">
               <Link
-                href="https://git.new/scira"
+                href="https://github.com/kamesh6592-cell/meowihh"
                 className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
                 target="_blank"
               >
@@ -299,7 +299,7 @@ export default function AboutPage() {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="https://git.new/scira"
+              href="https://github.com/kamesh6592-cell/meowihh"
               className="inline-flex h-11 items-center gap-2 px-6 rounded-lg bg-foreground text-background hover:bg-foreground/90 transition-colors"
               target="_blank"
             >
@@ -544,7 +544,7 @@ export default function AboutPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/30 border border-border/30">
               <span className="text-sm text-muted-foreground">Powered by the best</span>
               <Button asChild variant="ghost" size="sm" className="h-6 px-2 text-xs text-primary hover:text-primary/80">
-                <Link href="https://git.new/scira" target="_blank">
+                <Link href="https://github.com/kamesh6592-cell/meowihh" target="_blank">
                   View source
                   <ArrowUpRight className="ml-1 h-3 w-3" />
                 </Link>
@@ -1124,7 +1124,7 @@ export default function AboutPage() {
           <div className="text-center mt-12 space-y-6">
             <p className="text-muted-foreground">
               Have more questions?{' '}
-              <a href="mailto:zaid@scira.ai" className="text-primary hover:text-primary/80 transition-colors">
+              <a href="mailto:support@ajstudioz.co.in" className="text-primary hover:text-primary/80 transition-colors">
                 Contact us
               </a>
             </p>
@@ -1174,14 +1174,14 @@ export default function AboutPage() {
               </Link>
               <div className="flex items-center gap-2">
                 <Link
-                  href="https://x.com/sciraai"
+                  href="https://x.com/ajstudioz"
                   className="p-2 text-muted-foreground hover:text-foreground transition-colors"
                   target="_blank"
                 >
                   <XLogoIcon className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="https://git.new/scira"
+                  href="https://github.com/kamesh6592-cell/meowihh"
                   className="p-2 text-muted-foreground hover:text-foreground transition-colors"
                   target="_blank"
                 >
