@@ -122,7 +122,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
           <div className="space-y-3">
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <a href="https://git.new/scira" target="_blank" className="hover:text-foreground transition-colors">
+              <a href="https://github.com/kamesh6592-cell/meowihh" target="_blank" className="hover:text-foreground transition-colors">
                 Open Source
               </a>
               <span>•</span>
@@ -141,7 +141,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
               </a>{' '}
               •{' '}
               <a
-                href="https://peerlist.io/zaidmukaddam/project/scira-ai-20"
+                href="https://meowihh.vercel.app"
                 target="_blank"
                 className="hover:text-foreground transition-colors"
               >

@@ -64,17 +64,17 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/ph',
-        destination: 'https://www.producthunt.com/posts/scira',
+        destination: 'https://www.producthunt.com/posts/ajstudioz',
         permanent: true,
       },
       {
         source: '/raycast',
-        destination: 'https://www.raycast.com/zaidmukaddam/scira',
+        destination: 'https://www.meowihh.vercel.app',
         permanent: true,
       },
       {
         source: '/plst',
-        destination: 'https://peerlist.io/zaidmukaddam/project/scira-ai-30',
+        destination: 'https://meowihh.vercel.app',
         permanent: true,
       },
       {

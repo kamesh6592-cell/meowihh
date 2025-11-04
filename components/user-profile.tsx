@@ -93,7 +93,7 @@ const NavigationMenu = memo(() => {
         )}
 
         <DropdownMenuItem className="cursor-pointer" asChild>
-          <a href={'https://api.scira.ai/'} target="_blank" className="w-full flex items-center gap-2">
+          <a href={'https://meowihh.vercel.app/api/'} target="_blank" className="w-full flex items-center gap-2">
             <CodeIcon size={16} />
             <span>API</span>
           </a>
@@ -148,19 +148,19 @@ const NavigationMenu = memo(() => {
 
         {/* Social and External Links */}
         <DropdownMenuItem className="cursor-pointer" asChild>
-          <a href={'https://git.new/scira'} target="_blank" className="w-full flex items-center gap-2">
+          <a href={'https://github.com/kamesh6592-cell/meowihh'} target="_blank" className="w-full flex items-center gap-2">
             <GithubLogoIcon size={16} />
             <span>Github</span>
           </a>
         </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer" asChild>
-          <a href={'https://x.com/sciraai'} target="_blank" className="w-full flex items-center gap-2">
+          <a href={'https://x.com/ajstudioz'} target="_blank" className="w-full flex items-center gap-2">
             <XLogoIcon size={16} />
             <span>X.com</span>
           </a>
         </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer" asChild>
-          <a href={'https://www.instagram.com/scira.ai'} target="_blank" className="w-full flex items-center gap-2">
+          <a href={'https://www.instagram.com/ajstudioz'} target="_blank" className="w-full flex items-center gap-2">
             <InstagramLogoIcon size={16} />
             <span>Instagram</span>
           </a>
@@ -176,7 +176,7 @@ const NavigationMenu = memo(() => {
           </a>
         </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer" asChild>
-          <a href={'https://scira.userjot.com'} target="_blank" className="w-full flex items-center gap-2">
+          <a href={'https://ajstudioz.co.in/feedback'} target="_blank" className="w-full flex items-center gap-2">
             <BugIcon className="size-4" />
             <span>Feature/Bug Request</span>
           </a>
