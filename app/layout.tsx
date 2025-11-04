@@ -34,13 +34,6 @@ export const metadata: Metadata = {
     'ai assistant',
     'search tool',
   ],
-    'mplx ai',
-    'zaid mukaddam',
-    'scira.how',
-    'search engine',
-    'AI',
-    'perplexity',
-  ],
   robots: {
     index: true,
     follow: true,
