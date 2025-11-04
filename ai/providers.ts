@@ -261,7 +261,7 @@ export const models: Model[] = [
     category: 'Free',
     pdf: false,
     pro: false,
-    requiresAuth: false,
+    requiresAuth: true,
     freeUnlimited: false,
     maxOutputTokens: 40960,
     fast: true,
@@ -282,7 +282,7 @@ export const models: Model[] = [
     category: 'Free',
     pdf: false,
     pro: false,
-    requiresAuth: false,
+    requiresAuth: true,
     maxOutputTokens: 16000,
     freeUnlimited: false,
     parameters: {
