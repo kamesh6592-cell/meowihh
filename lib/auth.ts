@@ -437,6 +437,14 @@ export const auth = betterAuth({
     }),
     nextCookies(),
   ],
-  trustedOrigins: ['http://localhost:3000', 'https://scira.ai', 'https://www.scira.ai'],
-  allowedOrigins: ['http://localhost:3000', 'https://scira.ai', 'https://www.scira.ai'],
+  trustedOrigins: [
+    'http://localhost:3000',
+    'https://meowihh.vercel.app',
+    ...(serverEnv.BETTER_AUTH_URL ? [serverEnv.BETTER_AUTH_URL] : []),
+  ],
+  allowedOrigins: [
+    'http://localhost:3000',
+    'https://meowihh.vercel.app',
+    ...(serverEnv.BETTER_AUTH_URL ? [serverEnv.BETTER_AUTH_URL] : []),
+  ],
 });
