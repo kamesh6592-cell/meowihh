@@ -5,9 +5,9 @@ import { serverEnv } from '@/env/server';
 import { Supermemory } from 'supermemory';
 
 // Initialize the memory client with API key
-const supermemoryClient = new Supermemory({
+const supermemoryClient = serverEnv.SUPERMEMORY_API_KEY ? new Supermemory({
   apiKey: serverEnv.SUPERMEMORY_API_KEY
-});
+}) : null;
 
 // Define the types based on actual API responses
 export interface MemoryItem {
@@ -49,6 +49,10 @@ export async function searchMemories(query: string, page = 1, pageSize = 20): Pr
     throw new Error('Authentication required');
   }
 
+  if (!supermemoryClient) {
+    return { memories: [], total: 0 };
+  }
+
   if (!query.trim()) {
     return { memories: [], total: 0 };
   }
@@ -79,6 +83,10 @@ export async function getAllMemories(page = 1, pageSize = 20): Promise<MemoryRes
     throw new Error('Authentication required');
   }
 
+  if (!supermemoryClient) {
+    return { memories: [], total: 0 };
+  }
+
   try {
     const result = await supermemoryClient.memories.list({
       containerTags: [user.id],
@@ -105,6 +113,10 @@ export async function deleteMemory(memoryId: string) {
 
   if (!user) {
     throw new Error('Authentication required');
+  }
+
+  if (!supermemoryClient) {
+    throw new Error('Memory service not configured');
   }
 
   try {
