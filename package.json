@@ -9,7 +9,10 @@
     "start": "next start",
     "lint": "eslint",
     "fix": "prettier --write .",
-    "knip": "knip"
+    "knip": "knip",
+    "db:migrate": "node --import jiti/register scripts/migrate.ts",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "2.0.33",
