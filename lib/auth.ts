@@ -297,7 +297,7 @@ export const auth = betterAuth({
           return {};
         }
       },
-      use: [
+      use: ([
         ...(process.env.NEXT_PUBLIC_STARTER_TIER && process.env.NEXT_PUBLIC_STARTER_SLUG ? [checkout({
           products: [
             {
@@ -307,7 +307,7 @@ export const auth = betterAuth({
           ],
           successUrl: `/success`,
           authenticatedUsersOnly: true,
-        })] : []) as any,
+        })] : []),
         portal(),
         usage(),
         ...(process.env.POLAR_WEBHOOK_SECRET ? [webhooks({
@@ -431,8 +431,8 @@ export const auth = betterAuth({
               }
             }
           },
-        })] : []) as any,
-      ],
+        })] : []),
+      ] as any),
     }),
     nextCookies(),
   ],
