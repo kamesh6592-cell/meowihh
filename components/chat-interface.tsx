@@ -327,6 +327,13 @@ const ChatInterface = memo(
         }
       },
       onError: (error) => {
+        // Safety check for undefined error
+        if (!error) {
+          console.error('Chat error: undefined error object');
+          toast.error('An unexpected error occurred');
+          return;
+        }
+        
         // Don't show toast for ChatSDK errors as they will be handled by the enhanced error display
         if (error instanceof ChatSDKError) {
           console.log('ChatSDK Error:', error.type, error.surface, error.message);
@@ -337,9 +344,9 @@ const ChatInterface = memo(
             });
           }
         } else {
-          console.error('Chat error:', error.cause, error.message);
+          console.error('Chat error:', error?.cause, error?.message);
           toast.error('An error occurred.', {
-            description: `Oops! An error occurred while processing your request. ${error.cause || error.message}`,
+            description: `Oops! An error occurred while processing your request. ${error?.cause || error?.message || 'Unknown error'}`,
           });
         }
       },
