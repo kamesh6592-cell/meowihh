@@ -395,8 +395,7 @@ export async function POST(req: Request) {
               }
               : {}),
             parallelToolCalls: false,
-            structuredOutputs: true,
-            serviceTier: 'auto',
+            // Removed structuredOutputs and serviceTier - not supported on Groq free tier
           } satisfies GroqProviderOptions,
           xai: {
             parallel_tool_calls: false,
