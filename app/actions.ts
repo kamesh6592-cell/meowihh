@@ -152,11 +152,7 @@ export async function checkImageModeration(images: string[]) {
   const { text } = await generateText({
     model: groq('meta-llama/llama-guard-4-12b'),
     messages,
-    providerOptions: {
-      groq: {
-        service_tier: 'flex',
-      },
-    },
+    // Removed service_tier - not supported by Groq free tier
   });
   return text;
 }
@@ -174,10 +170,7 @@ export async function generateTitleFromUserMessage({ message }: { message: UIMes
     - do not write anything other than the title
     - do not use quotes or colons`,
       prompt: JSON.stringify(message),
-      providerOptions: {
-        groq: {
-          service_tier: 'flex',
-        },
+      // Removed providerOptions - not needed and causes errors with Groq
       },
     });
 
