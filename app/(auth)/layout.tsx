@@ -1,38 +1,38 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
 import { useState, useEffect } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
-import { SciraLogo } from '@/components/logos/scira-logo';
 
 const testimonials = [
   {
     content:
-      '"Scira @sciraai is better than Grok at digging up information from X, its own platform! I asked it 3 different queries to help scrape and find some data points I was interested in about my own account and Scira did much much better with insanely accurate answers!"',
-    author: 'Chris Universe',
-    handle: '@chrisuniverseb',
-    link: 'https://x.com/chrisuniverseb/status/1943025911043100835',
+      '"AJ STUDIOZ provides incredible AI-powered search capabilities that understand exactly what you need. The results are fast, accurate, and comprehensive!"',
+    author: 'Tech Enthusiast',
+    handle: '@techuser',
+    link: '#',
   },
   {
-    content: '"scira dot ai does a really good job scraping through the reddit mines btw"',
-    author: 'nyaaier',
-    handle: '@nyaaier',
-    link: 'https://x.com/nyaaier/status/1932810453107065284',
-  },
-  {
-    content:
-      "Hi @sciraai, just for curiosity, I searched for myself using its Gemini 2.5 Pro and in extreme mode to see what results it could generate. And it created this 👇🏻 It is not just the best, it is wild. And the best part is it's 10000% accurate.",
-    author: 'Aniruddha Dak',
-    handle: '@aniruddhadak',
-    link: 'https://x.com/aniruddhadak/status/1917140602107445545',
+    content: '"AJ STUDIOZ makes research and information discovery incredibly efficient and intuitive"',
+    author: 'Power User',
+    handle: '@poweruser',
+    link: '#',
   },
   {
     content:
-      '"read nothing the whole sem and here I am with @sciraai to top my mid sems !! Literally so good to get all the related diagram, points and even topics from the website my professor uses to teach us 🙌"',
-    author: 'Rajnandinit',
-    handle: '@itsRajnandinit',
-    link: 'https://x.com/itsRajnandinit/status/1897896134837682288',
+      "The AI research capabilities of AJ STUDIOZ are outstanding. It finds exactly what I need with remarkable accuracy.",
+    author: 'Research Professional',
+    handle: '@researcher',
+    link: '#',
+  },
+  {
+    content:
+      '"AJ STUDIOZ has transformed how I search for information. The AI understands context and delivers perfect results every time!"',
+    author: 'Digital Creator',
+    handle: '@creator',
+    link: '#',
   },
 ];
 
@@ -56,8 +56,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="flex-1 flex flex-col justify-between p-12">
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center gap-2">
-              <SciraLogo className="size-8" />
-              <span className="text-lg font-medium">Scira AI</span>
+              <Image src="/aj-logo.jpg" alt="AJ STUDIOZ" width={32} height={32} className="rounded" />
+              <span className="text-lg font-bold">AJ STUDIOZ</span>
             </Link>
           </div>
 

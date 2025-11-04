@@ -1,9 +1,9 @@
 import React from 'react';
-import { SciraLogo } from './logos/scira-logo';
+import Image from 'next/image';
 
 export const SciraLogoHeader = () => (
   <div className="flex items-center gap-2 my-1.5">
-    <SciraLogo className="size-6.5" />
-    <h2 className="text-xl font-normal font-be-vietnam-pro text-foreground dark:text-foreground">Scira</h2>
+    <Image src="/aj-logo.jpg" alt="AJ STUDIOZ" width={26} height={26} className="rounded" />
+    <h2 className="text-xl font-bold font-be-vietnam-pro text-foreground dark:text-foreground">AJ STUDIOZ</h2>
   </div>
 );
