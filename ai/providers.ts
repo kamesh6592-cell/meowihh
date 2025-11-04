@@ -34,41 +34,41 @@ const anannas = process.env.ANANNAS_API_KEY ? createOpenAI({
 
 export const scira = customProvider({
   languageModels: {
-    // Default model - smart fallback across all providers
-    'scira-default': process.env.GROQ_API_KEY 
-      ? groq('llama-3.3-70b-versatile')
-      : process.env.OPENAI_API_KEY
+    // Default model - prioritize OpenAI/Anthropic (more stable than Groq)
+    'scira-default': process.env.OPENAI_API_KEY 
       ? openai('gpt-4o-mini')
       : process.env.ANTHROPIC_API_KEY
       ? anthropic('claude-3-5-haiku-20241022')
+      : process.env.GROQ_API_KEY
+      ? groq('llama-3.3-70b-versatile')
       : process.env.XAI_API_KEY
       ? xai('grok-4-fast-non-reasoning')
-      : groq('llama-3.3-70b-versatile'), // Fallback
+      : openai('gpt-4o-mini'), // Final fallback
     
-    'scira-nano': process.env.GROQ_API_KEY
-      ? groq('llama-3.3-70b-versatile')
-      : process.env.OPENAI_API_KEY
+    'scira-nano': process.env.OPENAI_API_KEY
       ? openai('gpt-4o-mini')
-      : anthropic('claude-3-5-haiku-20241022'),
+      : process.env.ANTHROPIC_API_KEY
+      ? anthropic('claude-3-5-haiku-20241022')
+      : groq('llama-3.3-70b-versatile'),
     
-    'scira-name': process.env.GROQ_API_KEY
-      ? groq('llama-3.3-70b-versatile')
-      : process.env.OPENAI_API_KEY
+    'scira-name': process.env.OPENAI_API_KEY
       ? openai('gpt-4o-mini')
-      : anthropic('claude-3-5-haiku-20241022'),
+      : process.env.ANTHROPIC_API_KEY
+      ? anthropic('claude-3-5-haiku-20241022')
+      : groq('llama-3.3-70b-versatile'),
     
     'scira-grok-3-mini': process.env.XAI_API_KEY ? xai('grok-3-mini') : groq('llama-3.3-70b-versatile'),
     'scira-grok-3': process.env.XAI_API_KEY ? xai('grok-3') : openai('gpt-4o'),
     'scira-grok-4': process.env.XAI_API_KEY ? xai('grok-4') : openai('gpt-4o'),
     'scira-grok-4-fast': process.env.XAI_API_KEY ? xai('grok-4-fast-non-reasoning') : openai('gpt-4o-mini'),
     'scira-grok-4-fast-think': process.env.XAI_API_KEY ? xai('grok-4-fast') : openai('o1'),
-    'scira-code': process.env.XAI_API_KEY ? xai('grok-code-fast-1') : groq('llama-3.3-70b-versatile'),
+    'scira-code': process.env.XAI_API_KEY ? xai('grok-code-fast-1') : openai('gpt-4o'),
     'scira-enhance': process.env.GROQ_API_KEY ? groq('moonshotai/kimi-k2-instruct-0905') : openai('gpt-4o'),
-    'scira-follow-up': process.env.GROQ_API_KEY
-      ? groq('llama-3.3-70b-versatile')
-      : process.env.OPENAI_API_KEY
+    'scira-follow-up': process.env.OPENAI_API_KEY
       ? openai('gpt-4o-mini')
-      : anthropic('claude-3-5-haiku-20241022'),
+      : process.env.ANTHROPIC_API_KEY
+      ? anthropic('claude-3-5-haiku-20241022')
+      : groq('llama-3.3-70b-versatile'),
     'scira-qwen-4b': huggingface.chat('Qwen/Qwen3-4B-Instruct-2507:nscale'),
     'scira-qwen-4b-thinking': wrapLanguageModel({
       model: huggingface.chat('Qwen/Qwen3-4B-Thinking-2507:nscale'),
