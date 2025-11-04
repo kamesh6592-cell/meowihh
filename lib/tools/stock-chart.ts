@@ -199,10 +199,10 @@ export const stockChartTool = tool({
     const actualIncludeMarketMovers = isProUser && include_market_movers;
     const actualFilingTypes = isProUser ? filing_types : undefined;
 
-    // Initialize all API clients
-    const tvly = tavily({ apiKey: serverEnv.TAVILY_API_KEY });
-    const exa = new Exa(serverEnv.EXA_API_KEY);
-    const valyu = new Valyu(serverEnv.VALYU_API_KEY);
+    // Initialize all API clients with optional keys
+    const tvly = serverEnv.TAVILY_API_KEY ? tavily({ apiKey: serverEnv.TAVILY_API_KEY }) : null;
+    const exa = serverEnv.EXA_API_KEY ? new Exa(serverEnv.EXA_API_KEY) : null;
+    const valyu = serverEnv.VALYU_API_KEY ? new Valyu(serverEnv.VALYU_API_KEY) : null;
 
     // Calculate if we expect a lot of data to be returned
     const hasMultipleDataSources = [

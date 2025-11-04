@@ -24,8 +24,12 @@ export const retrieveTool = tool({
     live_crawl?: 'never' | 'auto' | 'preferred';
   }) => {
     try {
-      const exa = new Exa(serverEnv.EXA_API_KEY as string);
-      const firecrawl = new FirecrawlApp({ apiKey: serverEnv.FIRECRAWL_API_KEY });
+      if (!serverEnv.EXA_API_KEY && !serverEnv.FIRECRAWL_API_KEY) {
+        throw new Error('Either EXA_API_KEY or FIRECRAWL_API_KEY must be configured');
+      }
+      
+      const exa = serverEnv.EXA_API_KEY ? new Exa(serverEnv.EXA_API_KEY as string) : null;
+      const firecrawl = serverEnv.FIRECRAWL_API_KEY ? new FirecrawlApp({ apiKey: serverEnv.FIRECRAWL_API_KEY }) : null;
 
       console.log(`Retrieving content from ${url} with Exa AI, summary: ${include_summary}, livecrawl: ${live_crawl}`);
 
@@ -34,16 +38,21 @@ export const retrieveTool = tool({
       let usingFirecrawl = false;
 
       try {
-        // Try Exa AI first
-        result = await exa.getContents([url], {
-          text: true,
-          summary: include_summary ? true : undefined,
-          livecrawl: live_crawl,
-        });
+        // Try Exa AI first if available
+        if (exa) {
+          result = await exa.getContents([url], {
+            text: true,
+            summary: include_summary ? true : undefined,
+            livecrawl: live_crawl,
+          });
 
-        // Check if Exa returned results
-        if (!result.results || result.results.length === 0 || !result.results[0].text) {
-          console.log('Exa AI returned no content, falling back to Firecrawl');
+          // Check if Exa returned results
+          if (!result.results || result.results.length === 0 || !result.results[0].text) {
+            console.log('Exa AI returned no content, falling back to Firecrawl');
+            usingFirecrawl = true;
+          }
+        } else {
+          console.log('Exa AI not configured, using Firecrawl');
           usingFirecrawl = true;
         }
       } catch (exaError) {
@@ -54,6 +63,9 @@ export const retrieveTool = tool({
 
       // Use Firecrawl as fallback
       if (usingFirecrawl) {
+        if (!firecrawl) {
+          throw new Error('No content retrieval service available - both EXA_API_KEY and FIRECRAWL_API_KEY are missing');
+        }
         const urlWithoutHttps = url.replace(/^https?:\/\//, '');
         try {
           const scrapeResponse = await firecrawl.scrape(urlWithoutHttps, {

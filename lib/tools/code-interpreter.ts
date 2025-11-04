@@ -20,6 +20,10 @@ export const codeInterpreterTool = tool({
     console.log('Title:', title);
     console.log('Icon:', icon);
 
+    if (!serverEnv.DAYTONA_API_KEY) {
+      throw new Error('DAYTONA_API_KEY is not configured');
+    }
+
     const daytona = new Daytona({
       apiKey: serverEnv.DAYTONA_API_KEY,
       target: 'us',

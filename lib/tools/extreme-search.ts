@@ -29,12 +29,16 @@ const pythonLibsAvailable = [
   'scikit-learn',
 ];
 
-const daytona = new Daytona({
+const daytona = serverEnv.DAYTONA_API_KEY ? new Daytona({
   apiKey: serverEnv.DAYTONA_API_KEY,
   target: 'us',
-});
+}) : null;
 
 const runCode = async (code: string, installLibs: string[] = []) => {
+  if (!daytona) {
+    throw new Error('DAYTONA_API_KEY is not configured');
+  }
+  
   const sandbox = await daytona.create({
     snapshot: SNAPSHOT_NAME,
   });
@@ -48,8 +52,8 @@ const runCode = async (code: string, installLibs: string[] = []) => {
   return result;
 };
 
-const exa = new Exa(serverEnv.EXA_API_KEY);
-const firecrawl = new FirecrawlApp({ apiKey: serverEnv.FIRECRAWL_API_KEY });
+const exa = serverEnv.EXA_API_KEY ? new Exa(serverEnv.EXA_API_KEY) : null;
+const firecrawl = serverEnv.FIRECRAWL_API_KEY ? new FirecrawlApp({ apiKey: serverEnv.FIRECRAWL_API_KEY }) : null;
 
 type SearchResult = {
   title: string;

@@ -19,6 +19,10 @@ export const redditSearchTool = tool({
     maxResults?: number[];
     timeRange?: ('day' | 'week' | 'month' | 'year')[];
   }) => {
+    if (!serverEnv.TAVILY_API_KEY) {
+      throw new Error('TAVILY_API_KEY is not configured');
+    }
+    
     const apiKey = serverEnv.TAVILY_API_KEY;
     const tvly = tavily({ apiKey });
 
