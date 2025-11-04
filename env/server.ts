@@ -5,6 +5,7 @@ import { z } from 'zod';
 export const serverEnv = createEnv({
   server: {
     // Essential AI Keys (Required for core functionality)
+    GROQ_API_KEY: z.string().min(1), // Primary default model
     OPENAI_API_KEY: z.string().min(1),
     ANTHROPIC_API_KEY: z.string().min(1),
     
@@ -15,7 +16,6 @@ export const serverEnv = createEnv({
     
     // Optional AI Providers (can be added later)
     XAI_API_KEY: z.string().optional(),
-    GROQ_API_KEY: z.string().optional(),
     GOOGLE_GENERATIVE_AI_API_KEY: z.string().optional(),
     DAYTONA_API_KEY: z.string().optional(),
     ANANNAS_API_KEY: z.string().optional(),
