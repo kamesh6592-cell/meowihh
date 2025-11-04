@@ -126,7 +126,7 @@ export async function POST(req: Request) {
   const lightweightUser = await getLightweightUser();
 
   // Rate limit check for unauthenticated users
-  if (!lightweightUser) {
+  if (!lightweightUser && unauthenticatedRateLimit) {
     const identifier = getClientIdentifier(req);
     const { success, limit, reset } = await unauthenticatedRateLimit.limit(identifier);
 

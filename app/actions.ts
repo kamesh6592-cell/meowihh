@@ -162,9 +162,10 @@ export async function checkImageModeration(images: string[]) {
 }
 
 export async function generateTitleFromUserMessage({ message }: { message: UIMessage }) {
-  const { text: title } = await generateText({
-    model: scira.languageModel('scira-name'),
-    system: `You are an expert title generator. You are given a message and you need to generate a short title based on it.
+  try {
+    const { text: title } = await generateText({
+      model: scira.languageModel('scira-name'),
+      system: `You are an expert title generator. You are given a message and you need to generate a short title based on it.
 
     - you will generate a short title based on the first message a user begins a conversation with
     - ensure it is not more than 80 characters long
@@ -172,15 +173,22 @@ export async function generateTitleFromUserMessage({ message }: { message: UIMes
     - the title should creative and unique
     - do not write anything other than the title
     - do not use quotes or colons`,
-    prompt: JSON.stringify(message),
-    providerOptions: {
-      groq: {
-        service_tier: 'flex',
+      prompt: JSON.stringify(message),
+      providerOptions: {
+        groq: {
+          service_tier: 'flex',
+        },
       },
-    },
-  });
+    });
 
-  return title;
+    return title;
+  } catch (error) {
+    console.error('Failed to generate title:', error);
+    // Fallback to a simple title based on message content
+    const messageText = typeof message === 'string' ? message : JSON.stringify(message);
+    const fallbackTitle = messageText.slice(0, 80).trim();
+    return fallbackTitle || 'New Chat';
+  }
 }
 
 export async function enhancePrompt(raw: string) {
