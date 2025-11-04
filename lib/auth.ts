@@ -54,6 +54,7 @@ export const dodoPayments = process.env.DODO_PAYMENTS_API_KEY ? new DodoPayments
 }) : null;
 
 export const auth = betterAuth({
+  secret: serverEnv.BETTER_AUTH_SECRET,
   baseURL: serverEnv.BETTER_AUTH_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'),
   rateLimit: {
     max: 50,
@@ -82,7 +83,8 @@ export const auth = betterAuth({
     },
   }),
   socialProviders: {
-    ...(serverEnv.GITHUB_CLIENT_ID && serverEnv.GITHUB_CLIENT_SECRET
+    ...(serverEnv.GITHUB_CLIENT_ID && serverEnv.GITHUB_CLIENT_SECRET && 
+        serverEnv.GITHUB_CLIENT_ID.length > 0 && serverEnv.GITHUB_CLIENT_SECRET.length > 0
       ? {
           github: {
             clientId: serverEnv.GITHUB_CLIENT_ID,
@@ -90,7 +92,8 @@ export const auth = betterAuth({
           },
         }
       : {}),
-    ...(serverEnv.GOOGLE_CLIENT_ID && serverEnv.GOOGLE_CLIENT_SECRET
+    ...(serverEnv.GOOGLE_CLIENT_ID && serverEnv.GOOGLE_CLIENT_SECRET &&
+        serverEnv.GOOGLE_CLIENT_ID.length > 0 && serverEnv.GOOGLE_CLIENT_SECRET.length > 0
       ? {
           google: {
             clientId: serverEnv.GOOGLE_CLIENT_ID,
@@ -98,7 +101,8 @@ export const auth = betterAuth({
           },
         }
       : {}),
-    ...(serverEnv.TWITTER_CLIENT_ID && serverEnv.TWITTER_CLIENT_SECRET
+    ...(serverEnv.TWITTER_CLIENT_ID && serverEnv.TWITTER_CLIENT_SECRET &&
+        serverEnv.TWITTER_CLIENT_ID.length > 0 && serverEnv.TWITTER_CLIENT_SECRET.length > 0
       ? {
           twitter: {
             clientId: serverEnv.TWITTER_CLIENT_ID,
@@ -106,7 +110,8 @@ export const auth = betterAuth({
           },
         }
       : {}),
-    ...(serverEnv.MICROSOFT_CLIENT_ID && serverEnv.MICROSOFT_CLIENT_SECRET
+    ...(serverEnv.MICROSOFT_CLIENT_ID && serverEnv.MICROSOFT_CLIENT_SECRET &&
+        serverEnv.MICROSOFT_CLIENT_ID.length > 0 && serverEnv.MICROSOFT_CLIENT_SECRET.length > 0
       ? {
           microsoft: {
             clientId: serverEnv.MICROSOFT_CLIENT_ID,
