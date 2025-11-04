@@ -106,7 +106,7 @@ export function getStreamContext() {
 
 export async function POST(req: Request) {
   try {
-    console.log('🚀 API VERSION: 2025-11-04-v2 - Smart Fallback Active');
+    console.log('🚀 API VERSION: 2025-11-04-v3 - Anthropic Default Active');
     const requestStartTime = Date.now();
     const {
       messages,
@@ -122,7 +122,15 @@ export async function POST(req: Request) {
     const { latitude, longitude } = geolocation(req);
     const streamId = 'stream-' + uuidv7();
 
-    console.log('🔍 Search API:', { model: model?.trim(), group, latitude, longitude });
+    console.log('🔍 Search API:', { 
+      model: model?.trim(), 
+      group, 
+      latitude, 
+      longitude,
+      hasAnthropicKey: !!process.env.ANTHROPIC_API_KEY,
+      hasGoogleKey: !!process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+      hasXaiKey: !!process.env.XAI_API_KEY
+    });
 
   // CRITICAL PATH: Get auth status first (required for all subsequent checks)
   const lightweightUser = await getLightweightUser();
