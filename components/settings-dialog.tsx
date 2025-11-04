@@ -1354,7 +1354,7 @@ export function SubscriptionSection({ subscriptionData, isProUser, user }: any) 
                     <div className="flex items-center justify-between">
                       <div className="flex-1 min-w-0">
                         <p className={cn('font-medium truncate', isMobile ? 'text-xs' : 'text-sm')}>
-                          Scira Pro (DodoPayments)
+                          AJ STUDIOZ Pro (DodoPayments)
                         </p>
                         <div className="flex items-center gap-2">
                           <p className={cn('text-muted-foreground', isMobile ? 'text-[10px]' : 'text-xs')}>

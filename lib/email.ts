@@ -29,7 +29,7 @@ export async function sendLookoutCompletionEmail({
   
   try {
     const data = await resend.emails.send({
-      from: 'AJ STUDIOZ <noreply@ajstudioz.vercel.app>',
+      from: 'AJ STUDIOZ <noreply@ajstudioz.co.in>',
       to: [to],
       subject: `Lookout Complete: ${chatTitle}`,
       react: SearchCompletedEmail({
@@ -77,7 +77,7 @@ export async function sendNewLoginEmail({
   
   try {
     const data = await resend.emails.send({
-      from: 'AJ STUDIOZ Security <security@meowihh.vercel.app>',
+      from: 'AJ STUDIOZ Security <security@ajstudioz.co.in>',
       to: [to],
       subject: "We've noticed a new login",
       react: NewLoginEmail({
@@ -116,7 +116,7 @@ export async function sendWelcomeEmail({ to, userName }: SendWelcomeEmailParams)
   
   try {
     const data = await resend.emails.send({
-      from: 'AJ STUDIOZ <welcome@meowihh.vercel.app>',
+      from: 'AJ STUDIOZ <welcome@ajstudioz.co.in>',
       to: [to],
       subject: 'Welcome to AJ STUDIOZ!',
       react: WelcomeEmail({

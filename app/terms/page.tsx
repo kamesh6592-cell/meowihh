@@ -146,7 +146,7 @@ export default function TermsPage() {
               <strong>Free Plan:</strong> Includes limited daily searches with access to basic AI models
             </li>
             <li>
-              <strong>Scira Pro:</strong> $15/month subscription with unlimited searches and access to all AI models
+              <strong>AJ STUDIOZ Pro:</strong> $15/month subscription with unlimited searches and access to all AI models
             </li>
           </ul>
           <p>

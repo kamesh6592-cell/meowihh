@@ -110,7 +110,7 @@ export const PostMessageUpgradeDialog = React.memo(({ open, onOpenChange }: Post
           <div className="relative h-80 overflow-hidden rounded-t-lg">
             <Image
               src="/placeholder.png"
-              alt="Scira Pro"
+              alt="AJ STUDIOZ Pro"
               width={1200}
               height={630}
               className="w-full h-full object-cover"
