@@ -34,14 +34,14 @@ const anannas = process.env.ANANNAS_API_KEY ? createOpenAI({
 
 export const scira = customProvider({
   languageModels: {
-    // Default model - Use XAI Grok (you confirmed it works!)
-    'scira-default': process.env.XAI_API_KEY 
-      ? xai('grok-4-latest')
-      : process.env.ANTHROPIC_API_KEY
-      ? anthropic('claude-sonnet-4-20250514')
+    // Default model - Use Gemini 2.5 Flash (user requested)
+    'scira-default': process.env.GOOGLE_GENERATIVE_AI_API_KEY 
+      ? google('gemini-2.5-flash')
       : process.env.GROQ_API_KEY
       ? groq('llama-3.3-70b-versatile')
-      : xai('grok-4-latest'), // Final fallback
+      : process.env.ANTHROPIC_API_KEY
+      ? anthropic('claude-sonnet-4-20250514')
+      : google('gemini-2.5-flash'), // Final fallback
     
     'scira-nano': process.env.GROQ_API_KEY
       ? groq('llama-3.3-70b-versatile')

@@ -15,6 +15,7 @@ export const serverEnv = createEnv({
     GROQ_API_KEY: z.string().optional(),
     XAI_API_KEY: z.string().optional(),
     GOOGLE_GENERATIVE_AI_API_KEY: z.string().optional(),
+    HF_TOKEN: z.string().optional(),
     DAYTONA_API_KEY: z.string().optional(),
     ANANNAS_API_KEY: z.string().optional(),
     
