@@ -681,12 +681,12 @@ export function webSearchTool(
       topics?: ('general' | 'news' | undefined)[];
       quality?: ('default' | 'best' | undefined)[];
     }) => {
-      // Initialize all clients
+      // Initialize all clients with optional API keys
       const clients = {
-        exa: new Exa(serverEnv.EXA_API_KEY),
-        parallel: new Parallel({ apiKey: serverEnv.PARALLEL_API_KEY }),
-        firecrawl: new FirecrawlApp({ apiKey: serverEnv.FIRECRAWL_API_KEY }),
-        tvly: tavily({ apiKey: serverEnv.TAVILY_API_KEY }),
+        exa: serverEnv.EXA_API_KEY ? new Exa(serverEnv.EXA_API_KEY) : null,
+        parallel: serverEnv.PARALLEL_API_KEY ? new Parallel({ apiKey: serverEnv.PARALLEL_API_KEY }) : null,
+        firecrawl: serverEnv.FIRECRAWL_API_KEY ? new FirecrawlApp({ apiKey: serverEnv.FIRECRAWL_API_KEY }) : null,
+        tvly: serverEnv.TAVILY_API_KEY ? tavily({ apiKey: serverEnv.TAVILY_API_KEY }) : null,
       };
 
       console.log('Queries:', queries);
