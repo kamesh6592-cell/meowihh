@@ -610,17 +610,37 @@ class ExaSearchStrategy implements SearchStrategy {
 const createSearchStrategy = (
   provider: 'exa' | 'parallel' | 'tavily' | 'firecrawl',
   clients: {
-    exa: Exa;
-    parallel: Parallel;
-    firecrawl: FirecrawlApp;
-    tvly: TavilyClient;
+    exa: Exa | null;
+    parallel: Parallel | null;
+    firecrawl: FirecrawlApp | null;
+    tvly: TavilyClient | null;
   },
 ): SearchStrategy => {
   const strategies = {
-    parallel: () => new ParallelSearchStrategy(clients.parallel, clients.firecrawl),
-    tavily: () => new TavilySearchStrategy(clients.tvly),
-    firecrawl: () => new FirecrawlSearchStrategy(clients.firecrawl),
-    exa: () => new ExaSearchStrategy(clients.exa),
+    parallel: () => {
+      if (!clients.parallel || !clients.firecrawl) {
+        throw new Error('Parallel and Firecrawl API keys are required for parallel search');
+      }
+      return new ParallelSearchStrategy(clients.parallel, clients.firecrawl);
+    },
+    tavily: () => {
+      if (!clients.tvly) {
+        throw new Error('Tavily API key is required for Tavily search');
+      }
+      return new TavilySearchStrategy(clients.tvly);
+    },
+    firecrawl: () => {
+      if (!clients.firecrawl) {
+        throw new Error('Firecrawl API key is required for Firecrawl search');
+      }
+      return new FirecrawlSearchStrategy(clients.firecrawl);
+    },
+    exa: () => {
+      if (!clients.exa) {
+        throw new Error('Exa API key is required for Exa search');
+      }
+      return new ExaSearchStrategy(clients.exa);
+    },
   };
 
   return strategies[provider]();
