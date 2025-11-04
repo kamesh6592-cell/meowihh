@@ -80,6 +80,11 @@ enum SearchCategory {
 
 const searchWeb = async (query: string, category?: SearchCategory, include_domains?: string[]) => {
   console.log(`searchWeb called with query: "${query}", category: ${category}`);
+  
+  if (!exa) {
+    throw new Error('EXA_API_KEY not configured. Web search is unavailable.');
+  }
+  
   try {
     const { results } = await exa.searchAndContents(query, {
       numResults: 8,
@@ -119,44 +124,49 @@ const getContents = async (links: string[]) => {
   const failedUrls: string[] = [];
 
   // First, try Exa for all URLs
-  try {
-    const result = await exa.getContents(links, {
-      text: {
-        maxCharacters: 3000,
-        includeHtmlTags: false,
-      },
-      livecrawl: 'preferred',
-    });
-    console.log(`getContents received ${result.results.length} results from Exa API`);
+  if (exa) {
+    try {
+      const result = await exa.getContents(links, {
+        text: {
+          maxCharacters: 3000,
+          includeHtmlTags: false,
+        },
+        livecrawl: 'preferred',
+      });
+      console.log(`getContents received ${result.results.length} results from Exa API`);
 
-    // Process Exa results
-    for (const r of result.results) {
-      if (r.text && r.text.trim()) {
-        results.push({
-          title: r.title || r.url.split('/').pop() || 'Retrieved Content',
-          url: r.url,
-          content: r.text,
-          publishedDate: r.publishedDate || '',
-          favicon: r.favicon || `https://www.google.com/s2/favicons?domain=${new URL(r.url).hostname}&sz=128`,
-        });
-      } else {
-        // Add URLs with no content to failed list for Firecrawl fallback
-        failedUrls.push(r.url);
+      // Process Exa results
+      for (const r of result.results) {
+        if (r.text && r.text.trim()) {
+          results.push({
+            title: r.title || r.url.split('/').pop() || 'Retrieved Content',
+            url: r.url,
+            content: r.text,
+            publishedDate: r.publishedDate || '',
+            favicon: r.favicon || `https://www.google.com/s2/favicons?domain=${new URL(r.url).hostname}&sz=128`,
+          });
+        } else {
+          // Add URLs with no content to failed list for Firecrawl fallback
+          failedUrls.push(r.url);
+        }
       }
-    }
 
-    // Add any URLs that weren't returned by Exa to the failed list
-    const exaUrls = result.results.map((r) => r.url);
-    const missingUrls = links.filter((url) => !exaUrls.includes(url));
-    failedUrls.push(...missingUrls);
-  } catch (error) {
-    console.error('Exa API error:', error);
-    console.log('Adding all URLs to Firecrawl fallback list');
+      // Add any URLs that weren't returned by Exa to the failed list
+      const exaUrls = result.results.map((r) => r.url);
+      const missingUrls = links.filter((url) => !exaUrls.includes(url));
+      failedUrls.push(...missingUrls);
+    } catch (error) {
+      console.error('Exa API error:', error);
+      console.log('Adding all URLs to Firecrawl fallback list');
+      failedUrls.push(...links);
+    }
+  } else {
+    // If Exa is not available, add all URLs to failed list
     failedUrls.push(...links);
   }
 
   // Use Firecrawl as fallback for failed URLs
-  if (failedUrls.length > 0) {
+  if (failedUrls.length > 0 && firecrawl) {
     console.log(`Using Firecrawl fallback for ${failedUrls.length} URLs:`, failedUrls);
 
     for (const url of failedUrls) {
