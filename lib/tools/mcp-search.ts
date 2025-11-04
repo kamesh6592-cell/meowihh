@@ -9,6 +9,10 @@ export const mcpSearchTool = tool({
   }),
   execute: async ({ query }: { query: string }) => {
     try {
+      if (!serverEnv.SMITHERY_API_KEY) {
+        throw new Error('SMITHERY_API_KEY is not configured');
+      }
+      
       const response = await fetch(`https://registry.smithery.ai/servers?q=${encodeURIComponent(query)}`, {
         headers: {
           Authorization: `Bearer ${serverEnv.SMITHERY_API_KEY}`,
