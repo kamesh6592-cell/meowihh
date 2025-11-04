@@ -79,8 +79,8 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/blog',
-        destination: 'https://blog.scira.ai',
-        permanent: true,
+        destination: 'https://ajstudioz.co.in/blog',
+        permanent: false,
       },
     ];
   },

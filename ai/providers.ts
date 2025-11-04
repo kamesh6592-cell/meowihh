@@ -22,21 +22,21 @@ const huggingface = createOpenAI({
   apiKey: process.env.HF_TOKEN,
 });
 
-const anannas = createOpenAI({
+const anannas = process.env.ANANNAS_API_KEY ? createOpenAI({
   baseURL: 'https://api.anannas.ai/v1',
   apiKey: process.env.ANANNAS_API_KEY,
   headers: {
-    'HTTP-Referer': 'https://scira.ai',
-    'X-Title': 'Scira AI',
+    'HTTP-Referer': 'https://ajstudioz.co.in',
+    'X-Title': 'AJ STUDIOZ',
     'Content-Type': 'application/json',
   },
-});
+}) : null;
 
 export const scira = customProvider({
   languageModels: {
     'scira-default': xai('grok-4-fast-non-reasoning'),
     'scira-nano': groq('llama-3.3-70b-versatile'),
-    'scira-name': anannas.chat('meta-llama/llama-3.3-70b-instruct'),
+    'scira-name': groq('llama-3.3-70b-versatile'), // Changed from Anannas to Groq
     'scira-grok-3-mini': xai('grok-3-mini'),
     'scira-grok-3': xai('grok-3'),
     'scira-grok-4': xai('grok-4'),
@@ -78,11 +78,11 @@ export const scira = customProvider({
       middleware,
     }),
     'scira-deepseek-r1': wrapLanguageModel({
-      model: anannas.chat('deepseek/deepseek-r1'),
+      model: gateway('deepseek/deepseek-r1'),
       middleware,
     }),
     'scira-deepseek-r1-0528': wrapLanguageModel({
-      model: anannas.chat('deepseek/deepseek-r1-0528'),
+      model: gateway('deepseek/deepseek-r1-0528'),
       middleware,
     }),
     'scira-qwen-coder': huggingface.chat('Qwen/Qwen3-Coder-480B-A35B-Instruct:cerebras'),
@@ -115,7 +115,7 @@ export const scira = customProvider({
     'scira-cmd-a': cohere('command-a-03-2025'),
     'scira-cmd-a-think': cohere('command-a-reasoning-08-2025'),
     'scira-kimi-k2-v2': groq('moonshotai/kimi-k2-instruct-0905'),
-    'scira-haiku': anannas.chat('anthropic/claude-3-5-haiku-20241022'),
+    'scira-haiku': anthropic('claude-3-5-haiku-20241022'), // Changed from Anannas to direct Anthropic
     'scira-mistral-medium': mistral('mistral-medium-2508'),
     'scira-magistral-small': mistral('magistral-small-2509'),
     'scira-magistral-medium': mistral('magistral-medium-2509'),
