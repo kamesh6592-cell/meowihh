@@ -57,7 +57,7 @@ export const scira = customProvider({
     'scira-grok-4-fast': process.env.XAI_API_KEY ? xai('grok-4-latest') : groq('llama-3.3-70b-versatile'),
     'scira-grok-4-fast-think': process.env.XAI_API_KEY ? xai('grok-4-latest') : anthropic('claude-sonnet-4-20250514'),
     'scira-code': process.env.XAI_API_KEY ? xai('grok-4-latest') : anthropic('claude-sonnet-4-20250514'),
-    'scira-enhance': process.env.GOOGLE_GENERATIVE_AI_API_KEY ? google('gemini-2.0-flash-thinking-exp') : xai('grok-4-latest'),
+    'scira-enhance': process.env.GOOGLE_GENERATIVE_AI_API_KEY ? google('gemini-2.5-flash') : xai('grok-4-latest'),
     'scira-follow-up': process.env.XAI_API_KEY
       ? xai('grok-4-latest')
       : process.env.GROQ_API_KEY
@@ -137,9 +137,9 @@ export const scira = customProvider({
     'scira-mistral-medium': mistral('mistral-medium-2508'),
     'scira-magistral-small': mistral('magistral-small-2509'),
     'scira-magistral-medium': mistral('magistral-medium-2509'),
-    'scira-google-lite': google('gemini-flash-lite-latest'),
-    'scira-google': google('gemini-flash-latest'),
-    'scira-google-think': google('gemini-flash-latest'),
+    'scira-google-lite': google('gemini-2.5-flash'),
+    'scira-google': google('gemini-2.5-flash'),
+    'scira-google-think': google('gemini-2.5-flash'),
     'scira-google-pro': google('gemini-2.5-pro'),
     'scira-google-pro-think': google('gemini-2.5-pro'),
     'scira-anthropic': anthropic('claude-sonnet-4-5'),
