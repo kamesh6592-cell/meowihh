@@ -10,7 +10,7 @@ const scira = customProvider({
   },
 });
 
-export const maxDuration = 800;
+export const maxDuration = 10; // Vercel Hobby plan limit
 
 // Define separate system prompts for each group
 const groupSystemPrompts = {
