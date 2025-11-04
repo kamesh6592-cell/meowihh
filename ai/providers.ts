@@ -34,17 +34,18 @@ const anannas = process.env.ANANNAS_API_KEY ? createOpenAI({
 
 export const scira = customProvider({
   languageModels: {
-    'scira-default': xai('grok-4-fast-non-reasoning'),
-    'scira-nano': groq('llama-3.3-70b-versatile'),
-    'scira-name': groq('llama-3.3-70b-versatile'), // Changed from Anannas to Groq
-    'scira-grok-3-mini': xai('grok-3-mini'),
-    'scira-grok-3': xai('grok-3'),
-    'scira-grok-4': xai('grok-4'),
-    'scira-grok-4-fast': xai('grok-4-fast-non-reasoning'),
-    'scira-grok-4-fast-think': xai('grok-4-fast'),
-    'scira-code': xai('grok-code-fast-1'),
-    'scira-enhance': groq('moonshotai/kimi-k2-instruct-0905'),
-    'scira-follow-up': xai('grok-4-fast-non-reasoning'),
+    // Default model now uses OpenAI (required key) for better Vercel compatibility
+    'scira-default': openai('gpt-4o-mini'),
+    'scira-nano': openai('gpt-4o-mini'),
+    'scira-name': openai('gpt-4o-mini'), // For title generation
+    'scira-grok-3-mini': process.env.XAI_API_KEY ? xai('grok-3-mini') : openai('gpt-4o'),
+    'scira-grok-3': process.env.XAI_API_KEY ? xai('grok-3') : openai('gpt-4o'),
+    'scira-grok-4': process.env.XAI_API_KEY ? xai('grok-4') : openai('gpt-4o'),
+    'scira-grok-4-fast': process.env.XAI_API_KEY ? xai('grok-4-fast-non-reasoning') : openai('gpt-4o-mini'),
+    'scira-grok-4-fast-think': process.env.XAI_API_KEY ? xai('grok-4-fast') : openai('o1'),
+    'scira-code': process.env.XAI_API_KEY ? xai('grok-code-fast-1') : openai('gpt-4o'),
+    'scira-enhance': process.env.GROQ_API_KEY ? groq('moonshotai/kimi-k2-instruct-0905') : openai('gpt-4o'),
+    'scira-follow-up': openai('gpt-4o-mini'),
     'scira-qwen-4b': huggingface.chat('Qwen/Qwen3-4B-Instruct-2507:nscale'),
     'scira-qwen-4b-thinking': wrapLanguageModel({
       model: huggingface.chat('Qwen/Qwen3-4B-Thinking-2507:nscale'),
@@ -61,11 +62,11 @@ export const scira = customProvider({
     'scira-o4-mini': openai('o4-mini'),
     'scira-gpt5-codex': openai('gpt-5-codex'),
     'scira-qwen-32b': wrapLanguageModel({
-      model: groq('qwen/qwen3-32b'),
+      model: process.env.GROQ_API_KEY ? groq('qwen/qwen3-32b') : openai('gpt-4o'),
       middleware,
     }),
     'scira-gpt-oss-20': wrapLanguageModel({
-      model: groq('openai/gpt-oss-20b'),
+      model: process.env.GROQ_API_KEY ? groq('openai/gpt-oss-20b') : openai('gpt-4o'),
       middleware,
     }),
     'scira-gpt-oss-120': wrapLanguageModel({
@@ -114,7 +115,7 @@ export const scira = customProvider({
     }),
     'scira-cmd-a': cohere('command-a-03-2025'),
     'scira-cmd-a-think': cohere('command-a-reasoning-08-2025'),
-    'scira-kimi-k2-v2': groq('moonshotai/kimi-k2-instruct-0905'),
+    'scira-kimi-k2-v2': process.env.GROQ_API_KEY ? groq('moonshotai/kimi-k2-instruct-0905') : openai('gpt-4o'),
     'scira-haiku': anthropic('claude-3-5-haiku-20241022'), // Changed from Anannas to direct Anthropic
     'scira-mistral-medium': mistral('mistral-medium-2508'),
     'scira-magistral-small': mistral('magistral-small-2509'),
