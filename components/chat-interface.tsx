@@ -279,7 +279,14 @@ const ChatInterface = memo(
         setDataStream((ds) => (ds ? [...ds, dataPart] : []));
       },
       onFinish: async ({ message }) => {
-        console.log('onFinish<Client>', message.parts);
+        console.log('onFinish<Client>', message?.parts);
+        
+        // Safety check for message object
+        if (!message || !message.parts) {
+          console.error('onFinish called with invalid message:', message);
+          return;
+        }
+        
         // Refresh usage data after message completion for authenticated users
         if (user) {
           refetchUsage();
