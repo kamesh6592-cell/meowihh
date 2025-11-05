@@ -23,6 +23,14 @@ export const metadata: Metadata = {
     url: 'https://www.meow.ajstudioz.co.in',
     siteName: 'AJ STUDIOZ',
   },
+  icons: {
+    icon: [
+      { url: '/icon.png', sizes: 'any' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    apple: '/apple-icon.png',
+    shortcut: '/favicon.ico',
+  },
   keywords: [
     'aj studioz',
     'AJ STUDIOZ',
