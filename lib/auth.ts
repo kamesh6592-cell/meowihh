@@ -446,15 +446,15 @@ export const auth = betterAuth({
   trustedOrigins: [
     'http://localhost:3000',
     'https://meowihh.vercel.app',
-    'https://www.meow.ajstudioz.co.in',
     'https://meow.ajstudioz.co.in',
+    'https://www.meow.ajstudioz.co.in',
     ...(serverEnv.BETTER_AUTH_URL ? [serverEnv.BETTER_AUTH_URL] : []),
   ],
   allowedOrigins: [
     'http://localhost:3000',
     'https://meowihh.vercel.app',
-    'https://www.meow.ajstudioz.co.in',
     'https://meow.ajstudioz.co.in',
+    'https://www.meow.ajstudioz.co.in',
     ...(serverEnv.BETTER_AUTH_URL ? [serverEnv.BETTER_AUTH_URL] : []),
   ],
 });

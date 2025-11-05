@@ -12,7 +12,7 @@ import { ClientAnalytics } from '@/components/client-analytics';
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.meow.ajstudioz.co.in'),
+  metadataBase: new URL('https://meow.ajstudioz.co.in'),
   title: {
     default: 'AJ STUDIOZ - AI-Powered Research & Search Engine',
     template: '%s | AJ STUDIOZ',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description:
     'AJ STUDIOZ - Your intelligent AI research companion. Fast, accurate, and powerful search engine for all your research needs.',
   openGraph: {
-    url: 'https://www.meow.ajstudioz.co.in',
+    url: 'https://meow.ajstudioz.co.in',
     siteName: 'AJ STUDIOZ',
   },
   icons: {
