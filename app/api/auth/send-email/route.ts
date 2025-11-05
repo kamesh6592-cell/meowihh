@@ -56,7 +56,9 @@ export async function POST(req: NextRequest) {
                    'Unknown IP';
         
         console.log('📧 Sending login notification to:', user.email);
-        await sendNewLoginEmail({
+        console.log('User details:', { email: user.email, name: user.name, id: user.id });
+        
+        const result = await sendNewLoginEmail({
           to: user.email,
           userName: user.name,
           loginTime: new Date().toUTCString(),
@@ -64,7 +66,9 @@ export async function POST(req: NextRequest) {
           location: 'Unknown city, IN',
           browser: userAgent,
         });
+        
         console.log('✅ Login notification sent successfully');
+        console.log('Email result:', result);
       } catch (error) {
         console.error('❌ Failed to send login notification:', error);
       }
