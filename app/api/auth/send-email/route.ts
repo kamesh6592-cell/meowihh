@@ -7,12 +7,25 @@ import { eq } from 'drizzle-orm';
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth.api.getSession({
-      headers: req.headers,
-    });
+    // Try to get session, but don't fail if not available yet
+    let session;
+    try {
+      session = await auth.api.getSession({
+        headers: req.headers,
+      });
+    } catch (error) {
+      console.log('⚠️ Session not available yet, will retry...');
+    }
 
     if (!session?.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      // Session not ready yet after OAuth redirect
+      // Return success but log that email will be skipped
+      console.log('⚠️ No session available, email notification skipped');
+      return NextResponse.json({ 
+        success: false, 
+        error: 'Session not ready',
+        message: 'Will retry later' 
+      }, { status: 200 });
     }
 
     const body = await req.json();

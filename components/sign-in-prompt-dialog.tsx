@@ -44,16 +44,18 @@ const SignInButton = ({ provider, loading, setLoading }: SignInButtonProps) => {
               setLoading(true);
             },
             onSuccess: async () => {
-              // Trigger email notification after successful sign-in
-              try {
-                await fetch('/api/auth/send-email', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ type: 'login' }),
-                });
-              } catch (error) {
-                console.error('Failed to send email notification:', error);
-              }
+              // Wait for session to be established after OAuth redirect
+              setTimeout(async () => {
+                try {
+                  await fetch('/api/auth/send-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'login' }),
+                  });
+                } catch (error) {
+                  console.error('Failed to send email notification:', error);
+                }
+              }, 2000); // Wait 2 seconds for session to be ready
             },
           },
         );
