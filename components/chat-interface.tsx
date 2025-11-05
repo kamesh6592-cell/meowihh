@@ -657,7 +657,7 @@ const ChatInterface = memo(
             {status === 'ready' && messages.length === 0 && (
               <div className="text-center m-0 mb-2">
                 <div className="inline-flex items-center gap-3">
-                  <h1 className="text-4xl sm:text-5xl !mb-0 text-foreground dark:text-foreground font-be-vietnam-pro! font-light tracking-tighter">
+                  <h1 className="text-5xl sm:text-6xl !mb-0 font-be-vietnam-pro font-bold tracking-tight bg-gradient-to-br from-foreground via-foreground/95 to-foreground/80 bg-clip-text text-transparent">
                     AJ STUDIOZ
                   </h1>
                   {isUserPro && (
@@ -666,6 +666,9 @@ const ChatInterface = memo(
                     </h1>
                   )}
                 </div>
+                <p className="text-sm sm:text-base text-muted-foreground/80 mt-3 font-medium tracking-wide">
+                  AI-Powered Search Engine
+                </p>
               </div>
             )}
 
