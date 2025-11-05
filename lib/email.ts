@@ -1,4 +1,4 @@
-import { Resend } from 'resend';
+aimport { Resend } from 'resend';
 import { serverEnv } from '@/env/server';
 import SearchCompletedEmail from '@/components/emails/lookout-completed';
 import NewLoginEmail from '@/components/emails/new-login';

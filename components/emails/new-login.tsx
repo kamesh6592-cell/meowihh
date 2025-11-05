@@ -21,7 +21,7 @@ const NewLoginEmail = (props: NewLoginEmailProps) => {
             {/* Logo */}
             <Section className="mb-[32px]">
               <Img 
-                src="https://meowihh.vercel.app/aj-logo.jpg" 
+                src="https://meow.ajstudioz.co.in/aj-logo.jpg" 
                 alt="AJ STUDIOZ" 
                 className="w-[48px] h-[48px] rounded"
               />
@@ -64,15 +64,15 @@ const NewLoginEmail = (props: NewLoginEmailProps) => {
             <Section className="mb-[32px]">
               <Text className="text-[16px] text-[#374151] leading-[24px] m-0">
                 If this was you, you can ignore this alert. If you noticed any suspicious activity on your account, please{' '}
-                <a href="https://meowihh.vercel.app/settings" className="text-[#FF0000] no-underline font-medium">
+                <a href="https://meow.ajstudioz.co.in/settings" className="text-[#FF0000] no-underline font-medium">
                   change your password
                 </a>
                 {' '}and{' '}
-                <a href="https://meowihh.vercel.app/settings" className="text-[#FF0000] no-underline font-medium">
+                <a href="https://meow.ajstudioz.co.in/settings" className="text-[#FF0000] no-underline font-medium">
                   enable two-factor authentication
                 </a>
                 {' '}on your{' '}
-                <a href="https://meowihh.vercel.app/settings" className="text-[#FF0000] no-underline font-medium">
+                <a href="https://meow.ajstudioz.co.in/settings" className="text-[#FF0000] no-underline font-medium">
                   account page
                 </a>
                 .
