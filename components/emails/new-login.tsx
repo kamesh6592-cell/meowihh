@@ -17,18 +17,16 @@ const NewLoginEmail = (props: NewLoginEmailProps) => {
       <Head />
       <Body style={main}>
         <Container style={container}>
-          {/* Logo */}
-          <Section style={logoSection}>
-            <Img 
-              src="https://meow.ajstudioz.co.in/aj-logo.jpg" 
-              alt="AJ" 
-              width="48"
-              height="48"
-              style={logo}
-            />
-          </Section>
-
-          {/* Title */}
+            {/* Logo */}
+            <Section style={logoSection}>
+              <Img 
+                src="https://www.meow.ajstudioz.co.in/aj-logo.jpg" 
+                alt="AJ" 
+                width="48"
+                height="48"
+                style={logo}
+              />
+            </Section>          {/* Title */}
           <Section style={section}>
             <Text style={heading}>
               We've noticed a new login
@@ -63,15 +61,15 @@ const NewLoginEmail = (props: NewLoginEmailProps) => {
           <Section style={section}>
             <Text style={paragraph}>
               If this was you, you can ignore this alert. If you noticed any suspicious activity on your account, please{' '}
-              <Link href="https://meow.ajstudioz.co.in/settings" style={link}>
+              <Link href="https://www.meow.ajstudioz.co.in/settings" style={link}>
                 change your password
               </Link>
               {' '}and{' '}
-              <Link href="https://meow.ajstudioz.co.in/settings" style={link}>
+              <Link href="https://www.meow.ajstudioz.co.in/settings" style={link}>
                 enable two-factor authentication
               </Link>
               {' '}on your{' '}
-              <Link href="https://meow.ajstudioz.co.in/settings" style={link}>
+              <Link href="https://www.meow.ajstudioz.co.in/settings" style={link}>
                 account page.
               </Link>
             </Text>

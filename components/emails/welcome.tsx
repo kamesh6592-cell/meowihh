@@ -17,7 +17,7 @@ const WelcomeEmail = (props: WelcomeEmailProps) => {
             {/* Logo */}
             <Section className="text-center mb-[32px]">
               <Img 
-                src="https://meow.ajstudioz.co.in/aj-logo.jpg" 
+                src="https://www.meow.ajstudioz.co.in/aj-logo.jpg" 
                 alt="AJ STUDIOZ" 
                 className="w-[64px] h-[64px] mx-auto rounded"
               />
@@ -46,7 +46,7 @@ const WelcomeEmail = (props: WelcomeEmailProps) => {
             {/* CTA Button */}
             <Section className="text-center mb-[32px]">
               <Button
-                href="https://meow.ajstudioz.co.in"
+                href="https://www.meow.ajstudioz.co.in"
                 className="bg-[#FF0000] text-white px-[32px] py-[14px] rounded-[8px] text-[16px] font-medium no-underline inline-block"
               >
                 Start Searching

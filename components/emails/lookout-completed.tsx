@@ -15,7 +15,7 @@ const SearchCompletedEmail = (props: SearchCompletedEmailProps) => {
         <Body className="bg-white font-sans py-[40px]">
           <Container className="max-w-[560px] mx-auto px-[24px] py-[48px] bg-[#FFFFFF] border border-solid border-neutral-300 rounded-lg my-[24px]">
             <Section className="text-center mb-6">
-              <Img src="https://meow.ajstudioz.co.in/aj-logo.jpg" alt="AJ STUDIOZ" className="w-[48px] h-[48px] mx-auto mb-[24px] rounded" />
+              <Img src="https://www.meow.ajstudioz.co.in/aj-logo.jpg" alt="AJ STUDIOZ" className="w-[48px] h-[48px] mx-auto mb-[24px] rounded" />
               <Text className="text-[24px] font-semibold text-[#020304] mb-[16px] m-0">Daily Lookout Complete</Text>
               <Text className="text-[14px] font-medium text-[#374151] bg-[#F3F4F6] px-[16px] py-[8px] rounded-lg inline-block m-0 !mt-2">
                 {props.chatTitle}
@@ -99,7 +99,7 @@ const SearchCompletedEmail = (props: SearchCompletedEmailProps) => {
 
             <Section className="text-center mb-[40px]">
               <Button
-                href={`https://meow.ajstudioz.co.in/search/${props.chatId}`}
+                href={`https://www.meow.ajstudioz.co.in/search/${props.chatId}`}
                 className="bg-[#FF0000] text-white px-[32px] py-[14px] rounded-[8px] text-[16px] font-medium no-underline inline-block box-border"
               >
                 View Full Report
@@ -107,11 +107,11 @@ const SearchCompletedEmail = (props: SearchCompletedEmailProps) => {
             </Section>
 
             <Section className="text-center border-t border-solid border-black/30 pt-[32px]">
-              <Img src="https://meow.ajstudioz.co.in/aj-logo.jpg" alt="AJ STUDIOZ" className="w-[32px] h-[32px] mx-auto mb-[16px] rounded" />
+              <Img src="https://www.meow.ajstudioz.co.in/aj-logo.jpg" alt="AJ STUDIOZ" className="w-[32px] h-[32px] mx-auto mb-[16px] rounded" />
               <Text className="text-[14px] text-[#6B7280] m-0">
                 AJ STUDIOZ •{' '}
-                <a href="https://meow.ajstudioz.co.in" className="text-[#6B7280] no-underline">
-                  meow.ajstudioz.co.in
+                <a href="https://www.meow.ajstudioz.co.in" className="text-[#6B7280] no-underline">
+                  www.meow.ajstudioz.co.in
                 </a>
               </Text>
             </Section>
