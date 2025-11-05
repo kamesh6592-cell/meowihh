@@ -189,8 +189,8 @@ export default function AboutPage() {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link href="/" className="flex justify-items-end gap-1.5 group">
-              <SciraLogo className="size-7 transition-transform group-hover:scale-110" />
-              <span className="text-2xl font-normal tracking-tighter font-be-vietnam-pro">Scira</span>
+              <Image src="/aj-logo.jpg" alt="AJ STUDIOZ" width={28} height={28} className="size-7 rounded-md transition-transform group-hover:scale-110" />
+              <span className="text-2xl font-normal tracking-tighter font-be-vietnam-pro">AJ STUDIOZ</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -261,9 +261,9 @@ export default function AboutPage() {
       <section className="py-24 px-4">
         <div className="container max-w-4xl mx-auto text-center space-y-12">
           <div className="space-y-6">
-            <div className="flex items-end justify-center gap-1 mb-8">
-              <SciraLogo className="size-12" />
-              <h1 className="text-4xl font-normal font-be-vietnam-pro tracking-tighter">Scira</h1>
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <Image src="/aj-logo.jpg" alt="AJ STUDIOZ" width={48} height={48} className="size-12 rounded-lg" />
+              <h1 className="text-4xl font-normal font-be-vietnam-pro tracking-tighter">AJ STUDIOZ</h1>
             </div>
 
             <h2 className="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl mx-auto">
@@ -397,16 +397,16 @@ export default function AboutPage() {
 
           <div className="text-center">
             <a
-              href="https://openalternative.co/scira?utm_source=openalternative&utm_medium=badge&utm_campaign=embed&utm_content=tool-scira"
+              href="https://www.meow.ajstudioz.co.in"
               target="_blank"
               className="inline-block"
             >
               <Image
-                src="https://openalternative.co/scira/badge.svg?theme=dark&width=200&height=50"
+                src="/aj-logo.jpg"
                 width={200}
                 height={50}
-                alt="Scira badge"
-                className="mx-auto"
+                alt="AJ STUDIOZ"
+                className="mx-auto rounded-lg"
               />
             </a>
           </div>
@@ -473,7 +473,7 @@ export default function AboutPage() {
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <Eye className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Scira Lookout</h3>
+              <h3 className="text-lg font-semibold mb-2">AJ Lookout</h3>
               <p className="text-muted-foreground">
                 Schedule automated searches to monitor trends and get regular updates on topics that matter to you.
               </p>
@@ -1034,7 +1034,7 @@ export default function AboutPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-                  <span className="text-muted-foreground">Scira Lookout</span>
+                  <span className="text-muted-foreground">AJ Lookout</span>
                 </li>
               </ul>
 
@@ -1067,14 +1067,14 @@ export default function AboutPage() {
         <div className="container max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-2xl font-semibold mb-4">Frequently Asked Questions</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Find answers to common questions about Scira</p>
+            <p className="text-muted-foreground max-w-2xl mx-auto">Find answers to common questions about AJ STUDIOZ</p>
           </div>
 
           <ProAccordion type="single" collapsible className="w-full">
             <ProAccordionItem value="item-1">
-              <ProAccordionTrigger>What is Scira?</ProAccordionTrigger>
+              <ProAccordionTrigger>What is AJ STUDIOZ?</ProAccordionTrigger>
               <ProAccordionContent>
-                Scira is an open-source AI-powered search engine that uses RAG (Retrieval-Augmented Generation) and
+                AJ STUDIOZ is an open-source AI-powered search engine that uses RAG (Retrieval-Augmented Generation) and
                 search grounding to provide accurate, up-to-date answers from reliable sources.
               </ProAccordionContent>
             </ProAccordionItem>
@@ -1105,17 +1105,17 @@ export default function AboutPage() {
             </ProAccordionItem>
 
             <ProAccordionItem value="item-5">
-              <ProAccordionTrigger>What AI models does Scira use?</ProAccordionTrigger>
+              <ProAccordionTrigger>What AI models does AJ STUDIOZ use?</ProAccordionTrigger>
               <ProAccordionContent>
-                Scira uses a range of advanced AI models including Grok, Claude, OpenAI GPT, Gemini, and more to provide
+                AJ STUDIOZ uses a range of advanced AI models including Grok, Claude, OpenAI GPT, Gemini, and more to provide
                 the best possible answers for different types of queries.
               </ProAccordionContent>
             </ProAccordionItem>
 
             <ProAccordionItem value="item-6">
-              <ProAccordionTrigger>How does Scira ensure information accuracy?</ProAccordionTrigger>
+              <ProAccordionTrigger>How does AJ STUDIOZ ensure information accuracy?</ProAccordionTrigger>
               <ProAccordionContent>
-                Scira combines RAG technology with search grounding to retrieve information from reliable sources and
+                AJ STUDIOZ combines RAG technology with search grounding to retrieve information from reliable sources and
                 verify it before providing answers. Each response includes source attribution for transparency.
               </ProAccordionContent>
             </ProAccordionItem>
@@ -1133,7 +1133,7 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 px-4 sm:px-6 py-4 rounded-xl bg-muted/40 border border-border/40 max-w-lg mx-auto">
               <div className="text-center sm:text-left flex-1">
                 <p className="text-sm font-medium text-foreground">Ready to get started?</p>
-                <p className="text-xs text-muted-foreground">Join thousands using Scira</p>
+                <p className="text-xs text-muted-foreground">Join thousands using AJ STUDIOZ</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                 <Button onClick={() => router.push('/')} size="sm" className="px-4 py-2 text-sm w-full sm:w-auto">
@@ -1158,8 +1158,8 @@ export default function AboutPage() {
         <div className="container max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <SciraLogo className="size-8" />
-              <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Scira. All rights reserved.</p>
+              <Image src="/aj-logo.jpg" alt="AJ STUDIOZ" width={32} height={32} className="size-8 rounded-md" />
+              <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} AJ STUDIOZ. All rights reserved.</p>
             </div>
 
             <div className="flex items-center gap-6">
