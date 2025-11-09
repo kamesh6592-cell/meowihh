@@ -641,13 +641,14 @@ export async function POST(req: Request) {
         }),
       );
     },
-    onError(error) {
+    onError(error: unknown) {
       console.error('❌ Stream Error:', error);
-      console.error('Error name:', error?.name);
-      console.error('Error message:', error?.message);
-      console.error('Error stack:', error?.stack);
       
       if (error instanceof Error) {
+        console.error('Error name:', error.name);
+        console.error('Error message:', error.message);
+        console.error('Error stack:', error.stack);
+        
         if (error.message.includes('Rate Limit')) {
           return 'Oops, you have reached the rate limit! Please try again later.';
         }
@@ -660,6 +661,7 @@ export async function POST(req: Request) {
         // Return more specific error message for debugging
         return `Error: ${error.message}`;
       }
+      console.error('Unknown error type:', typeof error);
       return 'Oops, an error occurred!';
     },
     onFinish: async ({ messages }) => {
