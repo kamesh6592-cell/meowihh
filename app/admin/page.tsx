@@ -254,6 +254,12 @@ export default function AdminPage() {
               </Button>
               
               <Button variant="outline" asChild>
+                <a href="/api/debug/cashfree-test" target="_blank">
+                  Test Cashfree API
+                </a>
+              </Button>
+              
+              <Button variant="outline" asChild>
                 <a href="/pricing" target="_blank">
                   View Pricing Page
                 </a>

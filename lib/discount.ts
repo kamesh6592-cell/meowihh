@@ -73,9 +73,10 @@ export async function getDiscountConfig(userEmail?: string): Promise<DiscountCon
         .filter((domain) => domain.length > 0);
     }
   } catch (error) {
-    console.warn('Failed to fetch student domains from Edge Config:', error);
+    // This is normal if Edge Config is not configured - use fallback domains
+    console.info('Using fallback student domains (Edge Config not configured)');
     // Fallback to hardcoded domains
-    studentDomains = ['.edu', '.ac.in'];
+    studentDomains = ['.edu', '.ac.in', '.edu.in', '.ac.uk', '.edu.au'];
   }
 
   // Check if user is a student

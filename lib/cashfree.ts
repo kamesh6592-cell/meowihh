@@ -94,6 +94,13 @@ export class CashfreePaymentService {
 
       const responseData = await response.json();
       
+      console.log('Cashfree Success Response:', {
+        status: response.status,
+        responseData,
+        hasToken: !!responseData.cf_token,
+        hasPaymentSessionId: !!responseData.payment_session_id
+      });
+      
       if (responseData && responseData.cf_token) {
         return {
           cfToken: responseData.cf_token,
@@ -101,7 +108,8 @@ export class CashfreePaymentService {
           paymentSessionId: responseData.payment_session_id,
         };
       } else {
-        throw new Error('Failed to create Cashfree payment session');
+        console.error('Cashfree response missing required fields:', responseData);
+        throw new Error(`Failed to create Cashfree payment session. Response: ${JSON.stringify(responseData)}`);
       }
     } catch (error) {
       console.error('Cashfree order creation failed:', error);
