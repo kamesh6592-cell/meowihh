@@ -32,11 +32,24 @@ const huggingface = createOpenAI({
 });
 
 const azure = createOpenAI({
-  baseURL: 'https://kamesh6592-7068-resource.services.ai.azure.com/models/chat/completions',
+  baseURL: 'https://kamesh6592-7068-resource.cognitiveservices.azure.com/openai',
   apiKey: process.env.AZURE_API_KEY,
   headers: {
-    'api-version': '2024-05-01-preview',
+    'api-version': '2025-04-01-preview',
   },
+});
+
+const azureGpt4oMini = createOpenAI({
+  baseURL: 'https://kamesh6592-7068-resource.cognitiveservices.azure.com/openai/deployments/gpt-4o-mini',
+  apiKey: process.env.AZURE_API_KEY,
+  headers: {
+    'api-version': '2025-01-01-preview',
+  },
+});
+
+const zhipuai = createOpenAI({
+  baseURL: 'https://api.z.ai/api/paas/v4',
+  apiKey: '3c24c4a7a4db4b37af59f8dca37e7e1f.OkptQ3sPbL1AwCFV',
 });
 
 const anannas = process.env.ANANNAS_API_KEY ? createOpenAI({
@@ -68,11 +81,11 @@ export const scira = customProvider({
       ? groq('llama-3.3-70b-versatile')
       : xai('grok-4-latest'),
     
-    'scira-grok-3-mini': azure.chat('grok-4-fast-non-reasoning'),
-    'scira-grok-3': azure.chat('grok-4-fast-non-reasoning'),
-    'scira-grok-4': azure.chat('grok-4-fast-non-reasoning'),
-    'scira-grok-4-fast': azure.chat('grok-4-fast-non-reasoning'),
-    'scira-grok-4-fast-think': azure.chat('grok-4-fast-non-reasoning'),
+    'scira-grok-3-mini': azure.chat('gpt-5-mini'),
+    'scira-grok-3': azure.chat('gpt-5-mini'),
+    'scira-grok-4': azure.chat('gpt-5-mini'),
+    'scira-grok-4-fast': azure.chat('gpt-5-mini'),
+    'scira-grok-4-fast-think': azure.chat('gpt-5-mini'),
     'scira-code': isValidApiKey(process.env.XAI_API_KEY) ? xai('grok-4-latest') : anthropic('claude-sonnet-4-20250514'),
     'scira-enhance': isValidApiKey(process.env.GOOGLE_GENERATIVE_AI_API_KEY) ? google('gemini-2.5-flash') : xai('grok-4-latest'),
     'scira-follow-up': isValidApiKey(process.env.XAI_API_KEY)
@@ -85,6 +98,8 @@ export const scira = customProvider({
       model: isValidApiKey(process.env.GROQ_API_KEY) ? groq('llama-3.3-70b-versatile') : anthropic('claude-sonnet-4-20250514'),
       middleware: [middlewareWithStartWithReasoning],
     }),
+    'scira-gpt-4o-mini': azureGpt4oMini.chat('gpt-4o-mini'),
+    'scira-glm-4-flash': zhipuai.chat('glm-4.5-flash'),
     'scira-gpt-4.1-nano': openai('gpt-4.1-nano'),
     'scira-gpt-4.1-mini': openai('gpt-4.1-mini'),
     'scira-gpt-4.1': openai('gpt-4.1'),
@@ -250,11 +265,43 @@ export const models: Model[] = [
       minP: 0,
     },
   },
-  // Pro models - xAI Grok (using Azure)
+  {
+    value: 'scira-gpt-4o-mini',
+    label: 'GPT-4o Mini (Azure)',
+    description: "OpenAI's efficient small model via Azure",
+    vision: true,
+    reasoning: false,
+    experimental: false,
+    category: 'Free',
+    pdf: false,
+    pro: false,
+    requiresAuth: true,
+    freeUnlimited: false,
+    maxOutputTokens: 16384,
+    fast: true,
+    isNew: true,
+  },
+  {
+    value: 'scira-glm-4-flash',
+    label: 'GLM 4.5 Flash',
+    description: "Zhipu AI's fast efficient LLM",
+    vision: false,
+    reasoning: false,
+    experimental: false,
+    category: 'Free',
+    pdf: false,
+    pro: false,
+    requiresAuth: false,
+    freeUnlimited: true,
+    maxOutputTokens: 8000,
+    fast: true,
+    isNew: true,
+  },
+  // Pro models - GPT-5-mini via Azure (formerly Grok endpoints)
   {
     value: 'scira-grok-3-mini',
-    label: 'Grok 4 Fast (Azure)',
-    description: "xAI's fast reasoning LLM via Azure",
+    label: 'GPT-5 Mini (Azure)',
+    description: "OpenAI's GPT-5 Mini via Azure Cognitive Services",
     vision: true,
     reasoning: true,
     experimental: false,
@@ -263,12 +310,12 @@ export const models: Model[] = [
     pro: true,
     requiresAuth: true,
     freeUnlimited: false,
-    maxOutputTokens: 16000,
+    maxOutputTokens: 16384,
   },
   {
     value: 'scira-grok-3',
-    label: 'Grok 4 Fast (Azure)',
-    description: "xAI's fast reasoning LLM via Azure",
+    label: 'GPT-5 Mini (Azure)',
+    description: "OpenAI's GPT-5 Mini via Azure Cognitive Services",
     vision: true,
     reasoning: true,
     experimental: false,
@@ -277,12 +324,12 @@ export const models: Model[] = [
     pro: true,
     requiresAuth: true,
     freeUnlimited: false,
-    maxOutputTokens: 16000,
+    maxOutputTokens: 16384,
   },
   {
     value: 'scira-grok-4',
-    label: 'Grok 4 Fast (Azure)',
-    description: "xAI's fast reasoning LLM via Azure",
+    label: 'GPT-5 Mini (Azure)',
+    description: "OpenAI's GPT-5 Mini via Azure Cognitive Services",
     vision: true,
     reasoning: true,
     experimental: false,
@@ -291,12 +338,12 @@ export const models: Model[] = [
     pro: true,
     requiresAuth: true,
     freeUnlimited: false,
-    maxOutputTokens: 16000,
+    maxOutputTokens: 16384,
   },
   {
     value: 'scira-grok-4-fast-think',
-    label: 'Grok 4 Fast Thinking (Azure)',
-    description: "xAI's fastest reasoning LLM via Azure",
+    label: 'GPT-5 Mini Thinking (Azure)',
+    description: "OpenAI's GPT-5 Mini with advanced reasoning via Azure",
     vision: true,
     reasoning: true,
     experimental: false,
@@ -305,7 +352,7 @@ export const models: Model[] = [
     pro: true,
     requiresAuth: true,
     freeUnlimited: false,
-    maxOutputTokens: 16000,
+    maxOutputTokens: 16384,
     extreme: true,
     fast: true,
     isNew: true,
