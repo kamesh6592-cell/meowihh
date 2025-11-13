@@ -70,8 +70,26 @@ export class CashfreePaymentService {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(`Cashfree API error: ${errorData.message || response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        console.error('Cashfree API Error Details:', {
+          status: response.status,
+          statusText: response.statusText,
+          errorData,
+          requestUrl: `${CASHFREE_CONFIG.baseUrl}/orders`,
+          headers: this.getHeaders(),
+          requestBody: orderRequest
+        });
+        
+        // Provide specific error messages based on status code
+        if (response.status === 401) {
+          throw new Error(`Cashfree authentication failed. Check your CASHFREE_APP_ID and CASHFREE_SECRET_KEY in Vercel environment variables.`);
+        } else if (response.status === 403) {
+          throw new Error(`Cashfree access denied. Verify your API credentials and account permissions.`);
+        } else if (response.status === 400) {
+          throw new Error(`Cashfree request error: ${errorData.message || 'Invalid request parameters'}`);
+        } else {
+          throw new Error(`Cashfree API error (${response.status}): ${errorData.message || response.statusText}`);
+        }
       }
 
       const responseData = await response.json();

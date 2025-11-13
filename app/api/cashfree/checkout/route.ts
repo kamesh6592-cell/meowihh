@@ -59,8 +59,16 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Cashfree checkout error:', error);
+    
+    // Return more specific error message
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create payment session';
+    
     return NextResponse.json(
-      { error: 'Failed to create payment session' },
+      { 
+        error: errorMessage,
+        provider: 'cashfree',
+        timestamp: new Date().toISOString()
+      },
       { status: 500 }
     );
   }
