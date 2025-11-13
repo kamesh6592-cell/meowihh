@@ -467,17 +467,12 @@ export default function PricingTable({ subscriptionDetails, user }: PricingTable
                   </Button>
                 ) : (
                   <div className="space-y-3">
-                    <div className="border border-border/60 rounded-md p-3 bg-muted/30">
-                      <p className="text-xs text-muted-foreground">
-                        UPI AutoPay coming soon. Use subscription below.
-                      </p>
-                    </div>
-                    <Button 
-                      variant="outline"
-                      className="w-full opacity-50 cursor-not-allowed" 
-                      disabled
+                    <Button
+                      className="w-full group"
+                      onClick={() => handleCheckout(STARTER_TIER, STARTER_SLUG, 'dodo')}
                     >
-                      Pay ₹{getDiscountedPrice(PRICING.PRO_MONTHLY_INR, true)} (Unavailable)
+                      Pay ₹{getDiscountedPrice(PRICING.PRO_MONTHLY_INR, true)} + GST
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
                     <Button
                       className="w-full group"

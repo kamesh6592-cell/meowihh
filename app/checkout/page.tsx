@@ -213,26 +213,23 @@ export default function CheckoutPage() {
             Complete your one-time payment for AJ STUDIOZ Pro
           </p>
 
-          {/* Coming Soon Notice */}
+          {/* Payment Available Notice */}
           <div className="mt-6 mb-6">
-            <div className="border border-border rounded-lg p-6 bg-muted/30">
+            <div className="border border-green-200 rounded-lg p-6 bg-green-50/30 dark:border-green-800 dark:bg-green-950/30">
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 mt-0.5">
-                    <svg className="w-5 h-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <div className="flex-1 space-y-2">
-                    <p className="text-sm font-medium text-foreground">
-                      This payment method is temporarily unavailable
+                    <p className="text-sm font-medium text-green-800 dark:text-green-200">
+                      Secure payment available
                     </p>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      We&apos;re upgrading to UPI AutoPay for a better experience. Please use the{' '}
-                      <Link href="/pricing" className="text-foreground underline underline-offset-4 hover:text-foreground/80 transition-colors">
-                        monthly subscription option
-                      </Link>{' '}
-                      instead.
+                    <p className="text-sm text-green-700 dark:text-green-300 leading-relaxed">
+                      Complete your one-time payment securely with UPI, cards, or net banking. 
+                      Instant activation after successful payment.
                     </p>
                   </div>
                 </div>
@@ -268,7 +265,7 @@ export default function CheckoutPage() {
 
       {/* Checkout Form */}
       <div className="max-w-2xl mx-auto px-6 pb-24">
-        <Card className="opacity-50 pointer-events-none">
+        <Card>
           <CardHeader>
             <CardTitle>Billing Information</CardTitle>
             <CardDescription>Please provide your details to complete the checkout process</CardDescription>
@@ -394,12 +391,19 @@ export default function CheckoutPage() {
                   <Button
                     type="submit"
                     className="w-full h-12 bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black font-medium text-sm tracking-[-0.01em] transition-all duration-200 disabled:opacity-50"
-                    disabled={true}
+                    disabled={isLoading}
                   >
-                    Temporarily Unavailable
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                        Processing...
+                      </>
+                    ) : (
+                      <>Continue to Payment</>  
+                    )}
                   </Button>
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 text-center mt-3">
-                    UPI AutoPay coming soon for better experience
+                    Secure payment powered by DodoPayments
                   </p>
                 </div>
               </form>
@@ -408,7 +412,7 @@ export default function CheckoutPage() {
         </Card>
 
         {/* Tax Information Notice */}
-        <div className="mt-6 opacity-50">
+        <div className="mt-6">
           <Card>
             <CardHeader className="pb-0">
               <CardTitle>📄 Tax & Invoice Information</CardTitle>
@@ -425,7 +429,7 @@ export default function CheckoutPage() {
         </div>
 
         {/* Security Notice */}
-        <div className="mt-8 text-center opacity-50">
+        <div className="mt-8 text-center">
           <div className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-6 py-4 inline-block">
             <p className="text-sm text-zinc-700 dark:text-zinc-300">
               🔒 Secure checkout powered by{' '}
