@@ -63,7 +63,7 @@ export function getSearchGroups(searchProvider: SearchProvider = 'parallel') {
     {
       id: 'chat' as const,
       name: 'Chat',
-      description: 'Talk to the model directly.',
+      description: 'Pure chat mode - no search, no tools, just conversation.',
       icon: ChattingIcon,
       show: true,
     },
