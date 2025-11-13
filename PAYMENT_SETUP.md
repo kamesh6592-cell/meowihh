@@ -1,11 +1,12 @@
 # Payment System Setup Guide
 
 ## Overview
-Your AJ STUDIOZ application now has a complete payment and subscription system with three providers:
+Your AJ STUDIOZ application now has a complete Indian payment system with two providers:
 
-1. **Polar** - For international subscriptions and monthly billing
-2. **Cashfree** - Primary Indian payment provider (UPI, Cards, Net Banking, Wallets)
-3. **DodoPayments** - Fallback Indian payment provider
+1. **Cashfree** - Primary Indian payment provider (UPI, Cards, Net Banking, Wallets)
+2. **DodoPayments** - Fallback Indian payment provider
+
+**Note**: Polar (international payments) has been removed to focus exclusively on Indian market.
 
 ## Environment Variables Setup
 
@@ -13,24 +14,19 @@ Your AJ STUDIOZ application now has a complete payment and subscription system w
 Add these to your `.env.local` file:
 
 ```bash
-# Polar (International Subscriptions)
-POLAR_ACCESS_TOKEN=your_polar_access_token_here
-POLAR_WEBHOOK_SECRET=your_polar_webhook_secret_here
-NEXT_PUBLIC_STARTER_TIER=your_polar_product_id_here  
-NEXT_PUBLIC_STARTER_SLUG=your_polar_product_slug_here
-
 # Cashfree (Primary Indian Payments)  
 CASHFREE_APP_ID=your_cashfree_app_id_here
 CASHFREE_SECRET_KEY=your_cashfree_secret_key_here
 CASHFREE_WEBHOOK_SECRET=your_cashfree_webhook_secret_here
-# Note: NEXT_PUBLIC_CASHFREE_PRODUCT_ID is custom - you can set this as "aj_studioz_pro_1299" or any identifier
 
 # DodoPayments (Fallback Indian Payments)
 DODO_PAYMENTS_API_KEY=your_dodo_payments_api_key_here
 DODO_PAYMENTS_WEBHOOK_SECRET=your_dodo_payments_webhook_secret_here
-# Note: These are custom identifiers for your product - you can set them as:
+
+# Product Configuration (Custom Identifiers)
 NEXT_PUBLIC_PREMIUM_TIER=aj_studioz_pro_dodo
 NEXT_PUBLIC_PREMIUM_SLUG=pro-plan-dodo
+NEXT_PUBLIC_CASHFREE_PRODUCT_ID=aj_studioz_pro_1299
 ```
 
 ## Important Notes About Environment Variables
