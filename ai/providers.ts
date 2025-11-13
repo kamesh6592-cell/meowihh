@@ -32,11 +32,8 @@ const huggingface = createOpenAI({
 });
 
 const azure = createOpenAI({
-  baseURL: 'https://kamesh6592-7068-resource.cognitiveservices.azure.com/openai',
+  baseURL: 'https://kamesh6592-7068-resource.cognitiveservices.azure.com/openai/responses?api-version=2025-04-01-preview',
   apiKey: process.env.AZURE_API_KEY,
-  headers: {
-    'api-version': '2025-04-01-preview',
-  },
 });
 
 const azureGpt4oMini = createOpenAI({
@@ -101,10 +98,7 @@ export const scira = customProvider({
       middleware: [middlewareWithStartWithReasoning],
     }),
     'scira-gpt-4o-mini': azureGpt4oMini.chat('gpt-4o-mini'),
-    'scira-glm-4-flash': wrapLanguageModel({
-      model: isValidApiKey(process.env.ZHIPUAI_API_KEY) ? zhipuai.chat('glm-4.5-flash') : google('gemini-2.5-flash'),
-      middleware: [middlewareWithStartWithReasoning],
-    }),
+    'scira-glm-4-flash': isValidApiKey(process.env.ZHIPUAI_API_KEY) ? zhipuai.chat('glm-4.5-flash') : google('gemini-2.5-flash'),
     'scira-gpt-5-mini-free': azure.chat('gpt-5-mini'),
     'scira-grok-4-fast-free': azureGrok.chat('grok-4-fast-non-reasoning'),
     'scira-gpt-5-mini': azure.chat('gpt-5-mini'),
@@ -291,10 +285,10 @@ export const models: Model[] = [
   },
   {
     value: 'scira-glm-4-flash',
-    label: 'GLM 4.5 Flash Thinking',
-    description: "Zhipu AI's fast reasoning LLM with thinking process",
+    label: 'GLM 4.5 Flash',
+    description: "Zhipu AI's fast efficient LLM",
     vision: false,
-    reasoning: true,
+    reasoning: false,
     experimental: false,
     category: 'Free',
     pdf: false,
