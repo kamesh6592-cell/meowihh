@@ -12,7 +12,10 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
-import { Shield, UserPlus, UserX, TestTube, CreditCard, Loader2, Users, Search, Crown, Calendar, Mail, ChevronLeft, ChevronRight } from 'lucide-react';
+import { 
+  Shield, Users, UserPlus, UserX, CreditCard, TestTube, Crown, UserMinus,
+  Search, ChevronLeft, ChevronRight, Mail 
+} from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
@@ -61,6 +64,8 @@ export default function AdminPage() {
   const [reason, setReason] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [testLoading, setTestLoading] = useState(false);
+  const [testEmailAddress, setTestEmailAddress] = useState('');
+  const [emailLoading, setEmailLoading] = useState(false);
 
   // Check if user is admin
   useEffect(() => {
@@ -210,8 +215,10 @@ export default function AdminPage() {
         const data = await response.json();
         toast.success('Redirecting to ₹2 test payment...', { id: 'test-payment' });
         
-        // Redirect to Cashfree test checkout
-        const checkoutUrl = `${process.env.NODE_ENV === 'production' ? 'https://checkout.cashfree.com' : 'https://sandbox.cashfree.com'}/pay/${data.cfToken}`;
+        // Use the payment session ID or cf_token for checkout URL
+        const sessionId = data.paymentSessionId || data.cfToken;
+        const isProduction = window.location.hostname !== 'localhost' && !window.location.hostname.includes('vercel.app');
+        const checkoutUrl = `${isProduction ? 'https://checkout.cashfree.com' : 'https://sandbox.cashfree.com'}/pay/session/${sessionId}`;
         console.log('Test payment redirect URL:', checkoutUrl);
         window.location.href = checkoutUrl;
       } else {
@@ -222,6 +229,39 @@ export default function AdminPage() {
       toast.error('Failed to create test payment', { id: 'test-payment' });
     } finally {
       setTestLoading(false);
+    }
+  };
+
+  const handleTestEmail = async () => {
+    if (!testEmailAddress.trim()) {
+      toast.error('Please enter a test email address');
+      return;
+    }
+
+    setEmailLoading(true);
+    try {
+      toast.loading('Sending test email notifications...', { id: 'test-email' });
+      
+      const response = await fetch('/api/admin/test-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          testEmail: testEmailAddress.trim(),
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        toast.success('Test emails sent successfully!', { id: 'test-email' });
+        setTestEmailAddress('');
+      } else {
+        const errorData = await response.json();
+        toast.error(`Test email failed: ${errorData.error}`, { id: 'test-email' });
+      }
+    } catch (error) {
+      toast.error('Failed to send test email', { id: 'test-email' });
+    } finally {
+      setEmailLoading(false);
     }
   };
 
@@ -530,7 +570,7 @@ export default function AdminPage() {
                   Payment System Testing
                 </CardTitle>
                 <CardDescription>
-                  Test payment integration with small amounts
+                  Test payment integration and email notifications
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -580,6 +620,41 @@ export default function AdminPage() {
                       <div className="text-2xl font-bold text-blue-600">₹249</div>
                       <div className="text-xs text-muted-foreground">Live Amount</div>
                     </div>
+                  </div>
+                </div>
+
+                {/* Email Testing Section */}
+                <div className="border-t pt-6 mt-6">
+                  <h4 className="font-medium mb-4 flex items-center gap-2">
+                    📧 Email Notification Testing
+                  </h4>
+                  <div className="space-y-4">
+                    <div>
+                      <Label htmlFor="testEmail">Test Email Address</Label>
+                      <Input
+                        id="testEmail"
+                        type="email"
+                        placeholder="user@example.com"
+                        value={testEmailAddress}
+                        onChange={(e) => setTestEmailAddress(e.target.value)}
+                      />
+                    </div>
+                    <Button
+                      onClick={handleTestEmail}
+                      disabled={emailLoading || !testEmailAddress}
+                      variant="outline"
+                      className="w-full"
+                    >
+                      {emailLoading ? (
+                        <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin mr-2" />
+                      ) : (
+                        <Mail className="w-4 h-4 mr-2" />
+                      )}
+                      {emailLoading ? 'Sending...' : 'Send Test Email Notification'}
+                    </Button>
+                    <p className="text-sm text-muted-foreground">
+                      This will send a test order confirmation email to the specified address and admin notification to kamesh6592@gmail.com
+                    </p>
                   </div>
                 </div>
               </CardContent>

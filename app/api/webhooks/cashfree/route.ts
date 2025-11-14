@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CashfreePaymentService } from '@/lib/cashfree';
+import { EmailService } from '@/lib/email-service';
 import { db } from '@/lib/db';
 import { payment, user } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
@@ -103,6 +104,25 @@ async function handlePaymentSuccess(paymentData: any) {
       });
 
     console.log('💾 Stored Cashfree payment record:', paymentRecord.id);
+
+    // Send email notifications for successful payment
+    if (customerEmail) {
+      try {
+        await EmailService.sendOrderConfirmation({
+          orderId: paymentData.order.order_id,
+          amount: parseFloat(paymentData.order.order_amount),
+          currency: paymentData.order.order_currency || 'INR',
+          customerEmail: customerEmail,
+          customerPhone: paymentData.customer_details?.customer_phone,
+          paymentMethod: 'Cashfree',
+          timestamp: new Date(paymentData.payment_time || Date.now()),
+          status: 'success'
+        });
+        console.log('📧 Email notifications sent successfully for order:', paymentData.order.order_id);
+      } catch (emailError) {
+        console.error('📧 Failed to send email notifications:', emailError);
+      }
+    }
 
     // Invalidate user caches for Pro status update
     if (validUserId) {

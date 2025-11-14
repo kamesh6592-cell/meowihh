@@ -39,6 +39,11 @@ export async function POST(request: NextRequest) {
     // Create test payment session with Cashfree
     const paymentSession = await CashfreePaymentService.createPaymentOrder(paymentData);
 
+    // Create checkout URL
+    const isProduction = process.env.NODE_ENV === 'production';
+    const baseUrl = isProduction ? 'https://checkout.cashfree.com' : 'https://sandbox.cashfree.com';
+    const checkoutUrl = `${baseUrl}/pay/${paymentSession.cfToken}`;
+
     return NextResponse.json({
       success: true,
       orderId: paymentSession.orderId,
@@ -46,6 +51,7 @@ export async function POST(request: NextRequest) {
       paymentSessionId: paymentSession.paymentSessionId,
       orderAmount: paymentData.orderAmount,
       orderCurrency: paymentData.orderCurrency,
+      checkoutUrl,
       isTestPayment: true,
     });
   } catch (error) {
