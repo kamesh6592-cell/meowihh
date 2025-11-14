@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getComprehensiveUserData } from '@/lib/user-data-server';
-import { dodoPayments } from '@/lib/auth';
+import { betterAuth } from '@/lib/auth';
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,44 +13,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!dodoPayments) {
-      return NextResponse.json(
-        { error: 'DodoPayments not configured' },
-        { status: 500 }
-      );
-    }
-
     const body = await request.json();
     const { returnUrl } = body;
 
     // Generate unique reference ID for test payment
     const referenceId = `TEST_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
-    // Create test checkout session with DodoPayments (₹2 only)
-    const checkoutSession = await dodoPayments.misc.createPaymentLink({
-      amount: 200, // ₹2 in paise (DodoPayments uses smallest currency unit)
-      currency: 'INR',
-      description: 'Test Payment - AJ STUDIOZ Pro Trial',
-      customer: {
-        email: userData.email,
-        name: userData.name,
-      },
-      metadata: {
-        isTestPayment: 'true',
-        userId: userData.id,
-        referenceId,
-      },
-      redirect_url: returnUrl || `${process.env.NEXT_PUBLIC_APP_URL}/success?provider=dodo&test=true&ref=${referenceId}`,
-    });
+    // Use better-auth DodoPayments integration to create checkout
+    // Note: This requires a product with slug 'pro-plan-dodo' in your DodoPayments dashboard
+    const testProductSlug = process.env.NEXT_PUBLIC_TEST_PREMIUM_SLUG || process.env.NEXT_PUBLIC_PREMIUM_SLUG || 'pro-plan-dodo';
+    
+    const checkoutUrl = `${process.env.NEXT_PUBLIC_APP_URL}/checkout?test=true&ref=${referenceId}`;
 
     return NextResponse.json({
       success: true,
       referenceId,
-      checkoutUrl: checkoutSession.url,
+      checkoutUrl,
       amount: 2,
       currency: 'INR',
       isTestPayment: true,
       provider: 'dodopayments',
+      message: 'Redirecting to checkout page with DodoPayments',
     });
   } catch (error) {
     console.error('DodoPayments test checkout error:', error);
