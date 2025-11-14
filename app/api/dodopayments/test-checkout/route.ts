@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getComprehensiveUserData } from '@/lib/user-data-server';
-import { betterAuth } from '@/lib/auth';
 
 export async function POST(request: NextRequest) {
   try {

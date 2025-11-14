@@ -42,37 +42,52 @@ This document provides a comprehensive overview of all API keys, environment var
 
 ### Current AI/LLM Providers in AJ STUDIOZ:
 
-**🎯 Default Model**: Gemini 2.5 Flash (Google)
+**🎯 Default Model**: Gemini 2.5 Flash (Google) - Works with `GOOGLE_GENERATIVE_AI_API_KEY`
 
-**Free Tier Models:**
-- Qwen 3 4B (Alibaba) - Basic reasoning
-- GPT-4o Mini (OpenAI via Azure) - Vision support
-- GLM 4.5 Flash (Zhipu AI) - Fast inference
-- Grok 4 Fast (xAI via Azure) - Free tier with reasoning
-- GPT-5 Mini (OpenAI via Azure) - Free tier with vision
-- DeepSeek V3.1 (via Azure) - Free reasoning model
+#### Free Tier Models (Requires Authentication):
+| Model | Provider | Key Required | Features |
+|-------|----------|-------------|----------|
+| **Qwen 3 4B** | Alibaba via Groq | `GROQ_API_KEY` | Basic reasoning, 16K tokens |
+| **Qwen 3 4B Thinking** | Alibaba via Groq | `GROQ_API_KEY` | Enhanced reasoning |
+| **GPT-4o Mini** | OpenAI via Azure | `AZURE_API_KEY` | Vision, 16K tokens, Fast |
+| **GLM 4.5 Flash** | Zhipu AI | `ZHIPUAI_API_KEY` | Fast inference, 8K tokens |
+| **Grok 4 Fast Free** | xAI via Azure | `AZURE_API_KEY` | Vision, reasoning, 16K tokens |
+| **GPT-5 Mini Free** | OpenAI via Azure | `AZURE_API_KEY` | Vision, reasoning, PDF, 16K tokens |
+| **DeepSeek V3.1 Free** | DeepSeek via Azure | `AZURE_API_KEY` | Reasoning, 2K tokens |
 
-**Pro Tier Models:**
-- **Grok Series**: Grok 3 Mini, Grok 3, Grok 4, Grok 4 Fast Thinking
-- **GPT Series**: GPT-4.1, GPT-5, GPT-5 Mini, GPT-5 Medium, O3, O4 Mini
-- **DeepSeek**: R1, R1 Thinking (Azure) - Advanced reasoning
-- **Mistral**: Medium, Magistral Small/Medium - Multimodal
-- **Qwen**: 3 Max, 3 Max Preview - Advanced instruct
-- **GLM**: 4.5, 4.6 Air - Long context
-- **Cohere**: Command A, Command A Thinking
-- **Specialized**: Grok Code, GPT-5 Codex (coding focus)
+#### Pro Tier Models (Requires Pro Subscription):
+| Category | Models | Key Required | Features |
+|----------|--------|-------------|----------|
+| **Grok (xAI)** | Grok 3 Mini, Grok 3, Grok 4, Grok 4 Fast Thinking | `XAI_API_KEY` or `AZURE_API_KEY` | Vision (Grok 4), reasoning, 16K tokens |
+| **GPT (OpenAI)** | GPT-4.1, GPT-5, GPT-5 Mini, GPT-5 Medium, O3, O4 Mini | `OPENAI_API_KEY` or `AZURE_API_KEY` | Vision, reasoning, PDF, 16K tokens |
+| **DeepSeek** | R1, R1 Thinking, R1 0528 | `AZURE_API_KEY` | Advanced reasoning, 16K tokens |
+| **Mistral** | Medium, Magistral Small, Magistral Medium | `MISTRAL_API_KEY` | Multimodal, vision, PDF, 16K tokens |
+| **Qwen** | 3 Max, 3 Max Preview | `HF_TOKEN` (HuggingFace) | Advanced instruct, 10K tokens |
+| **GLM (Zhipu)** | 4.5, 4.6, 4.5 Air | `HF_TOKEN` | Long context (130K tokens), reasoning |
+| **Cohere** | Command A, Command A Thinking | `COHERE_API_KEY` | Command models, 16K tokens |
+| **Coding** | Grok Code, GPT-5 Codex | `XAI_API_KEY` / `OPENAI_API_KEY` | Specialized for coding |
 
-**Vision Support**: GPT models, Grok 4, Mistral models, Gemini
-**Reasoning Support**: Most Pro models, DeepSeek, Grok series
-**PDF Support**: Pro models with vision capabilities
+#### Required API Keys:
+| Key | Purpose | Priority | Where to Get |
+|-----|---------|----------|--------------|
+| `GOOGLE_GENERATIVE_AI_API_KEY` | Gemini 2.5 Flash (Default) | ✅ **High** | [Google AI Studio](https://makersuite.google.com/app/apikey) |
+| `AZURE_API_KEY` | Azure OpenAI models | ✅ **High** | [Azure Portal](https://portal.azure.com/) |
+| `GROQ_API_KEY` | Fast Llama & Qwen models | ⚠️ Recommended | [Groq Console](https://console.groq.com/) |
+| `XAI_API_KEY` | Grok models (Pro tier) | ⚠️ Optional | [xAI Console](https://console.x.ai/) |
+| `OPENAI_API_KEY` | GPT models (Pro tier) | ⚠️ Optional | [OpenAI Platform](https://platform.openai.com/api-keys) |
+| `ANTHROPIC_API_KEY` | Claude models | ⚠️ Optional | [Anthropic Console](https://console.anthropic.com/) |
+| `HF_TOKEN` | HuggingFace models | ⚠️ Optional | [HuggingFace](https://huggingface.co/settings/tokens) |
+| `ZHIPUAI_API_KEY` | GLM models | ⚠️ Optional | [Zhipu AI](https://api.z.ai/) |
+| `MISTRAL_API_KEY` | Mistral models | ⚠️ Optional | [Mistral Console](https://console.mistral.ai/) |
+| `COHERE_API_KEY` | Cohere models | ⚠️ Optional | [Cohere Dashboard](https://dashboard.cohere.com/) |
+| `ELEVENLABS_API_KEY` | Text-to-speech | ⚠️ Optional | [ElevenLabs](https://elevenlabs.io/) |
 
-| Key | Purpose | Required | Where to Get |
-| `XAI_API_KEY` | Grok AI model access | ⚠️ Optional | [xAI Console](https://console.x.ai/) |
-| `OPENAI_API_KEY` | GPT models (GPT-4, GPT-3.5) | ⚠️ Optional | [OpenAI Platform](https://platform.openai.com/api-keys) |
-| `ANTHROPIC_API_KEY` | Claude models access | ⚠️ Optional | [Anthropic Console](https://console.anthropic.com/) |
-| `GROQ_API_KEY` | Fast inference for LLMs | ⚠️ Optional | [Groq Console](https://console.groq.com/) |
-| `GOOGLE_GENERATIVE_AI_API_KEY` | Gemini models access | ⚠️ Optional | [Google AI Studio](https://makersuite.google.com/app/apikey) |
-| `ELEVENLABS_API_KEY` | Text-to-speech generation | ⚠️ Optional | [ElevenLabs](https://elevenlabs.io/) |
+**Notes:**
+- Default model works with just Google API key
+- Azure key provides access to multiple providers (OpenAI, DeepSeek, Grok)
+- Free tier models require user authentication
+- Pro tier models require active Pro subscription
+- Vision/PDF support varies by model (check table above)
 
 ---
 
