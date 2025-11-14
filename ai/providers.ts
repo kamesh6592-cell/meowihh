@@ -194,11 +194,15 @@ export const scira = customProvider({
     'scira-mistral-medium': mistral('mistral-medium-2508'),
     'scira-magistral-small': mistral('magistral-small-2509'),
     'scira-magistral-medium': mistral('magistral-medium-2509'),
-    'scira-google-lite': google('gemini-2.5-flash'),
+    // Google Gemini models (all versions)
+    'scira-google-lite': google('gemini-2.5-flash'), // Latest: Nov 2024
     'scira-google': google('gemini-2.5-flash'),
     'scira-google-think': google('gemini-2.5-flash'),
-    'scira-google-pro': google('gemini-2.5-pro'),
+    'scira-google-2.0-flash': google('gemini-2.0-flash-exp'), // Experimental Oct 2024
+    'scira-google-1.5-flash': google('gemini-1.5-flash'), // Older May 2024
+    'scira-google-pro': google('gemini-2.5-pro'), // Latest Pro: Nov 2024
     'scira-google-pro-think': google('gemini-2.5-pro'),
+    'scira-google-1.5-pro': google('gemini-1.5-pro'), // Older Pro
     'scira-anthropic': anthropic('claude-sonnet-4-5'),
   },
 });
