@@ -131,7 +131,7 @@ export const scira = customProvider({
     'scira-glm-4-flash': isValidApiKey(process.env.ZHIPUAI_API_KEY) ? zhipuai.chat('glm-4.5-flash') : google('gemini-2.5-flash'),
     // Free tier models - 6 unique model families
     'scira-deepinfra-free': isValidApiKey(process.env.DEEPINFRA_API_KEY) ? deepinfra.chat('deepseek-ai/DeepSeek-V3') : google('gemini-2.5-flash'),
-    'scira-cerebras-free': isValidApiKey(process.env.CEREBRAS_API_KEY) ? cerebras.chat('llama3.1-8b') : google('gemini-2.5-flash'),
+    'scira-cerebras-free': isValidApiKey(process.env.CEREBRAS_API_KEY) ? cerebras.chat('llama3.1-8b') : groq('llama-3.3-70b-versatile'),
     'scira-fireworks-free': isValidApiKey(process.env.FIREWORKS_API_KEY) ? fireworks.chat('accounts/fireworks/models/llama-v3p3-70b-instruct') : google('gemini-2.5-flash'),
     'scira-qwen-32b': wrapLanguageModel({
       model: isValidApiKey(process.env.GROQ_API_KEY) ? groq('llama-3.3-70b-versatile') : anthropic('claude-sonnet-4-20250514'),
