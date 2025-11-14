@@ -149,7 +149,8 @@ export default function CheckoutPage() {
           toast.success('Redirecting to payment gateway...', { id: 'checkout' });
           
           // Redirect to Cashfree checkout
-          const checkoutUrl = `${process.env.NODE_ENV === 'production' ? 'https://checkout.cashfree.com' : 'https://sandbox.cashfree.com'}/pay?cftoken=${cashfreeData.cfToken}`;
+          const checkoutUrl = `${process.env.NODE_ENV === 'production' ? 'https://checkout.cashfree.com' : 'https://sandbox.cashfree.com'}/pay/${cashfreeData.cfToken}`;
+          console.log('Redirecting to Cashfree checkout:', checkoutUrl);
           window.location.href = checkoutUrl;
           return;
         } else {

@@ -101,9 +101,10 @@ export class CashfreePaymentService {
         hasPaymentSessionId: !!responseData.payment_session_id
       });
       
-      if (responseData && responseData.cf_token) {
+      // Cashfree API returns payment_session_id, not cf_token in newer versions
+      if (responseData && (responseData.cf_token || responseData.payment_session_id)) {
         return {
-          cfToken: responseData.cf_token,
+          cfToken: responseData.cf_token || responseData.payment_session_id, // Use payment_session_id as fallback
           orderId: responseData.order_id,
           paymentSessionId: responseData.payment_session_id,
         };

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSession } from '@/lib/auth-client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,14 +9,57 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
-import { Shield, UserPlus, UserX, TestTube, CreditCard } from 'lucide-react';
+import { Shield, UserPlus, UserX, TestTube, CreditCard, Loader2 } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function AdminPage() {
+  const { data: session, isPending } = useSession();
+  const router = useRouter();
   const [userEmail, setUserEmail] = useState('');
   const [reason, setReason] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [testLoading, setTestLoading] = useState(false);
+
+  // Check if user is admin
+  useEffect(() => {
+    if (!isPending && (!session || session.user.email !== 'kamesh6592@gmail.com')) {
+      router.push('/sign-in?redirect=/admin');
+    }
+  }, [session, isPending, router]);
+
+  // Show loading while checking authentication
+  if (isPending) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4" />
+          <p className="text-muted-foreground">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show access denied if not admin
+  if (!session || session.user.email !== 'kamesh6592@gmail.com') {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center max-w-md">
+          <div className="text-6xl mb-4">🔒</div>
+          <h1 className="text-2xl font-bold mb-2">Access Denied</h1>
+          <p className="text-muted-foreground mb-4">
+            This admin panel is restricted to authorized personnel only.
+          </p>
+          <button 
+            onClick={() => router.push('/sign-in?redirect=/admin')}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+          >
+            Sign In
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const handlePremiumAction = async (action: 'grant' | 'revoke') => {
     if (!userEmail.trim()) {
@@ -70,7 +114,8 @@ export default function AdminPage() {
         toast.success('Redirecting to ₹2 test payment...', { id: 'test-payment' });
         
         // Redirect to Cashfree test checkout
-        const checkoutUrl = `${process.env.NODE_ENV === 'production' ? 'https://checkout.cashfree.com' : 'https://sandbox.cashfree.com'}/pay?cftoken=${data.cfToken}`;
+        const checkoutUrl = `${process.env.NODE_ENV === 'production' ? 'https://checkout.cashfree.com' : 'https://sandbox.cashfree.com'}/pay/${data.cfToken}`;
+        console.log('Test payment redirect URL:', checkoutUrl);
         window.location.href = checkoutUrl;
       } else {
         const errorData = await response.json();
