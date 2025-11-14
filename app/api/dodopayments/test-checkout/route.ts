@@ -12,24 +12,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Use test product in development, main product in production
-    const isDevelopment = process.env.NODE_ENV !== 'production';
-    const testProductSlug = process.env.NEXT_PUBLIC_TEST_PREMIUM_SLUG || 'starter';
-    const productionSlug = process.env.NEXT_PUBLIC_PREMIUM_SLUG || 'pro-plan-dodo';
-    
-    const checkoutSlug = isDevelopment ? testProductSlug : productionSlug;
-
-    // Create checkout URL with the appropriate product
-    const checkoutUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/dodopayments/checkout?slug=${checkoutSlug}`;
+    // In production, admins test with the real checkout flow
+    // This ensures the production payment system is working correctly
+    const checkoutUrl = `${process.env.NEXT_PUBLIC_APP_URL}/checkout`;
 
     return NextResponse.json({
       success: true,
       checkoutUrl,
-      message: isDevelopment 
-        ? `Test checkout with ${testProductSlug} product` 
-        : `Production checkout with ${productionSlug} product`,
-      mode: isDevelopment ? 'test' : 'production',
-      productSlug: checkoutSlug,
+      message: 'Redirecting to checkout page to test payment flow',
+      note: 'This uses your production DodoPayments configuration',
       provider: 'dodopayments',
     });
   } catch (error) {
