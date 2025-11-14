@@ -64,6 +64,7 @@ This document provides a comprehensive overview of all API keys, environment var
 | **Mistral** | Medium, Magistral Small, Magistral Medium | `MISTRAL_API_KEY` | Multimodal, vision, PDF, 16K tokens |
 | **Qwen** | 3 Max, 3 Max Preview | `HF_TOKEN` (HuggingFace) | Advanced instruct, 10K tokens |
 | **GLM (Zhipu)** | 4.5, 4.6, 4.5 Air | `HF_TOKEN` | Long context (130K tokens), reasoning |
+| **Kimi (MoonShot AI)** | K2 Latest | `GROQ_API_KEY` | Fast inference, 10K tokens |
 | **Cohere** | Command A, Command A Thinking | `COHERE_API_KEY` | Command models, 16K tokens |
 | **Coding** | Grok Code, GPT-5 Codex | `XAI_API_KEY` / `OPENAI_API_KEY` | Specialized for coding |
 
@@ -72,7 +73,7 @@ This document provides a comprehensive overview of all API keys, environment var
 |-----|---------|----------|--------------|
 | `GOOGLE_GENERATIVE_AI_API_KEY` | Gemini 2.5 Flash (Default) | ✅ **High** | [Google AI Studio](https://makersuite.google.com/app/apikey) |
 | `AZURE_API_KEY` | Azure OpenAI models | ✅ **High** | [Azure Portal](https://portal.azure.com/) |
-| `GROQ_API_KEY` | Fast Llama & Qwen models | ⚠️ Recommended | [Groq Console](https://console.groq.com/) |
+| `GROQ_API_KEY` | Fast Llama, Qwen & Kimi models | ⚠️ Recommended | [Groq Console](https://console.groq.com/) |
 | `XAI_API_KEY` | Grok models (Pro tier) | ⚠️ Optional | [xAI Console](https://console.x.ai/) |
 | `OPENAI_API_KEY` | GPT models (Pro tier) | ⚠️ Optional | [OpenAI Platform](https://platform.openai.com/api-keys) |
 | `ANTHROPIC_API_KEY` | Claude models | ⚠️ Optional | [Anthropic Console](https://console.anthropic.com/) |
