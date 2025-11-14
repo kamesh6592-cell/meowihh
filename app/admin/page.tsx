@@ -669,54 +669,39 @@ export default function AdminPage() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                </h3>
-                <p className="text-sm text-blue-800 dark:text-blue-200 mb-4">
-                  Test the complete payment flow with a minimal ₹2 charge to verify:
-                </p>
-                <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1 list-disc list-inside mb-4">
-                  <li>Cashfree integration</li>
-                  <li>Payment gateway redirect</li>
-                  <li>Success/failure handling</li>
-                  <li>Webhook processing</li>
-                </ul>
-                
-                <Button
-                  onClick={handleTestPayment}
-                  disabled={testLoading}
-                  className="w-full"
-                >
-                  <CreditCard className="w-4 h-4 mr-2" />
-                  {testLoading ? 'Creating...' : 'Start ₹2 Test Payment'}
-                </Button>
-              </div>
-
-              <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
-                <h3 className="font-medium text-yellow-900 dark:text-yellow-100 mb-2">
-                  Production Payment
-                </h3>
-                <p className="text-sm text-yellow-800 dark:text-yellow-200">
-                  Regular checkout flow: ₹249 + GST<br/>
-                  <a href="/pricing" className="text-yellow-600 dark:text-yellow-400 underline">
-                    Go to Pricing Page →
-                  </a>
-                </p>
-              </div>
-
-              <div className="pt-4 border-t">
-                <div className="grid grid-cols-2 gap-4 text-center">
-                  <div>
-                    <div className="text-2xl font-bold text-green-600">₹2</div>
-                    <div className="text-xs text-muted-foreground">Test Amount</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-blue-600">₹249</div>
-                    <div className="text-xs text-muted-foreground">Live Amount</div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+              <Button variant="outline" asChild>
+                <a href="/api/health" target="_blank">
+                  Check System Health
+                </a>
+              </Button>
+              
+              <Button variant="outline" asChild>
+                <a href="/api/test-payment-config" target="_blank">
+                  Payment Config Status
+                </a>
+              </Button>
+              
+              <Button variant="outline" asChild>
+                <a href="/api/debug/cashfree-test" target="_blank">
+                  Test Cashfree API
+                </a>
+              </Button>
+              
+              <Button variant="outline" asChild>
+                <a href="/pricing" target="_blank">
+                  View Pricing Page
+                </a>
+              </Button>
+              
+              <Button variant="outline" asChild>
+                <a href="/checkout" target="_blank">
+                  Test Checkout Flow
+                </a>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
         {/* Quick Actions */}
         <Card>

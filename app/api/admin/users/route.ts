@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getComprehensiveUserData } from '@/lib/user-data-server';
 import { db } from '@/lib/db';
-import { users } from '@/lib/db/schema';
+import { user } from '@/lib/db/schema';
 import { desc, sql } from 'drizzle-orm';
 
 export async function GET(request: NextRequest) {
@@ -24,31 +24,31 @@ export async function GET(request: NextRequest) {
     const offset = (page - 1) * limit;
 
     // Build query with search
-    let query = db.select({
-      id: users.id,
-      name: users.name,
-      email: users.email,
-      image: users.image,
-      emailVerified: users.emailVerified,
-      createdAt: users.createdAt,
-      updatedAt: users.updatedAt,
-    }).from(users);
+    const query = db.select({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      image: user.image,
+      emailVerified: user.emailVerified,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    }).from(user);
 
     // Add search filter if provided
     if (search) {
       query = query.where(
-        sql`lower(${users.name}) like ${`%${search.toLowerCase()}%`} OR lower(${users.email}) like ${`%${search.toLowerCase()}%`}`
+        sql`lower(${user.name}) like ${`%${search.toLowerCase()}%`} OR lower(${user.email}) like ${`%${search.toLowerCase()}%`}`
       );
     }
 
     // Execute query with pagination
     const allUsers = await query
-      .orderBy(desc(users.createdAt))
+      .orderBy(desc(user.createdAt))
       .limit(limit)
       .offset(offset);
 
     // Get total count for pagination
-    const totalCountResult = await db.select({ count: sql`count(*)` }).from(users);
+    const totalCountResult = await db.select({ count: sql`count(*)` }).from(user);
     const totalUsers = Number(totalCountResult[0]?.count || 0);
 
     // Get comprehensive data for each user (includes Pro status)
