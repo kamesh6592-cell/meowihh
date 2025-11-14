@@ -12,27 +12,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const body = await request.json();
-    const { returnUrl } = body;
-
-    // Generate unique reference ID for test payment
-    const referenceId = `TEST_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    
-    // Use better-auth DodoPayments integration to create checkout
-    // Note: This requires a product with slug 'pro-plan-dodo' in your DodoPayments dashboard
-    const testProductSlug = process.env.NEXT_PUBLIC_TEST_PREMIUM_SLUG || process.env.NEXT_PUBLIC_PREMIUM_SLUG || 'pro-plan-dodo';
-    
-    const checkoutUrl = `${process.env.NEXT_PUBLIC_APP_URL}/checkout?test=true&ref=${referenceId}`;
+    // For test payments, just redirect to the main checkout page
+    // DodoPayments will handle the ₹1299 payment
+    // Admin can test the full payment flow
+    const checkoutUrl = `${process.env.NEXT_PUBLIC_APP_URL}/checkout`;
 
     return NextResponse.json({
       success: true,
-      referenceId,
       checkoutUrl,
-      amount: 2,
-      currency: 'INR',
-      isTestPayment: true,
+      message: 'Test DodoPayments checkout - Use your main product (₹1299)',
+      note: 'This will use your configured DodoPayments product. For ₹2 test, you need to create a separate test product in DodoPayments dashboard with slug "test-product"',
       provider: 'dodopayments',
-      message: 'Redirecting to checkout page with DodoPayments',
     });
   } catch (error) {
     console.error('DodoPayments test checkout error:', error);
